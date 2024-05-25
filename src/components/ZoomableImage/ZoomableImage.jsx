@@ -9,9 +9,21 @@ export const ZoomableImage = ({ src }) => {
 
     const handleWheel = (e) => {
         e.preventDefault()
+
+        const rect = imgRef.current.getBoundingClientRect()
+        const x = e.clientX - rect.left // x position within the element.
+        const y = e.clientY - rect.top // y position within the element.
+
         let newScale = scale
         newScale *= e.deltaY > 0 ? 1.1 : 0.9
+
+        const newPosition = {
+            x: position.x - x * (newScale - scale),
+            y: position.y - y * (newScale - scale),
+        }
+
         setScale(newScale)
+        setPosition(newPosition)
     }
 
     const handleMouseDown = (e) => {
