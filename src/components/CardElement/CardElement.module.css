@@ -1,0 +1,68 @@
+.modal {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.4);
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s;
+}
+
+.modal.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.content {
+    padding: 20px;
+    border-radius: 12px;
+    background: white;
+    transform: scale(0.5);
+    transition: transform 0.5s;
+    width: 70vw;
+    max-height: 80vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.content.active {
+    transform: scale(1);
+}
+
+.header {
+    width: 95%;
+    height: 10%;
+    border-radius: 15%;
+    background-color: rgb(0, 157, 255);
+    margin: 0px auto;
+    /* перенос строки, если заголовок не влезает в одну */
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    white-space: normal;
+}
+
+.header__text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 48px;
+    font-weight: 600;
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #75a3c9;
+}

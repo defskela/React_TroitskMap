@@ -1,5 +1,4 @@
 import { useEffect, useRef } from 'react'
-import reactLogo from '../../assets/react.svg'
 import map from '../../assets/1.svg'
 
 function trackTransforms(ctx) {
@@ -70,17 +69,15 @@ export const ZoomableCanvas = () => {
     const canvasRef = useRef(null)
 
     useEffect(() => {
-        var canvas = document.getElementsByTagName('canvas')[0]
+        var canvas = document.getElementById('1PieceOfMap')
         canvas.width = 5000
         canvas.height = 6000
         var gkhead = new Image()
-        // var ball = new Image()
         window.onload = function () {
             var ctx = canvas.getContext('2d')
             trackTransforms(ctx)
 
             function redraw() {
-                // Clear the entire canvas
                 var p1 = ctx.transformedPoint(0, 0)
                 var p2 = ctx.transformedPoint(canvas.width, canvas.height)
                 ctx.clearRect(p1.x, p1.y, p2.x - p1.x, p2.y - p1.y)
@@ -89,8 +86,9 @@ export const ZoomableCanvas = () => {
             }
             redraw()
 
-            var lastX = canvas.width / 2,
-                lastY = canvas.height / 2
+            var lastX = canvas.width / 2
+            var lastY = canvas.height / 2
+
             canvas.addEventListener(
                 'mousemove',
                 function (evt) {
@@ -123,11 +121,7 @@ export const ZoomableCanvas = () => {
             canvas.addEventListener('mousewheel', handleScroll, false)
         }
         gkhead.src = map
-        // ball.src = 'http://phrogz.net/tmp/alphaball.png'
-
-        // Adds ctx.getTransform() - returns an SVGMatrix
-        // Adds ctx.transformedPoint(x,y) - returns an SVGPoint
     }, [])
 
-    return <canvas ref={canvasRef} />
+    return <canvas ref={canvasRef} id="1PieceOfMap" />
 }
