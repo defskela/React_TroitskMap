@@ -20,7 +20,6 @@ export const PieceOfMap = ({ name, image }) => {
 
         e.target.style.transformOrigin = `${x}px ${y}px`
         e.target.style.transform = `scale(${scaleRef.current})`
-        console.log('scale', scaleRef.current)
     }
 
     return (
