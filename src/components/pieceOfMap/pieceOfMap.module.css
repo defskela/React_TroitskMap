@@ -1,0 +1,10 @@
+.pieceOfMap {
+    width: 500px;
+    height: 500px;
+}
+
+.pieceOfMap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
