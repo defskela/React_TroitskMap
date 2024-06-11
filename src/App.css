@@ -1,10 +1,16 @@
 #root {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 2rem;
     text-align: center;
 }
 
 .hid {
     visibility: hidden;
+}
+
+.area {
+    width: 50px;
+    height: 50px;
+    border: 10px solid red;
+    position: absolute;
+    left: 72%;
+    top: 28%;
 }

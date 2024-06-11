@@ -27,6 +27,7 @@ function App() {
                 {/* тексты хранятся в файле texts.jsx, чтобы не засорять тут код */}
                 {textIFWD}
             </CardElement>
+            <div className="area"></div>
             <ZoomableCanvas />
         </div>
     )
