@@ -4,12 +4,14 @@ import { propTypesCardElement } from './CardElement.types.js'
 import { useEffect } from 'react'
 import { Carousel } from 'react-responsive-carousel'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
+import { LinkButton } from '../LinkButton/LinkButton.jsx'
 
 export const CardElement = ({
     open,
     setOpen,
     images,
     // imagesLegens = [],
+    hrefMoreDetails,
     header,
     children,
 }) => {
@@ -70,6 +72,8 @@ export const CardElement = ({
                     interval={3000}
                     showArrows={false}
                     showThumbs={true}
+                    showIndicators={true}
+                    stopOnHover={false}
                     renderIndicator={spanIndicator}
                 >
                     {/* Создаем карусель из изображений, переданных в props images. Также можно сделать подписи к изображениям, если передать props imagesLegends */}
@@ -86,7 +90,10 @@ export const CardElement = ({
                 <div className={styles.header}>
                     <h1 className={styles.header__text}>{header}</h1>
                 </div>
-                <div className={styles.text}> {children}</div>
+                <div className={styles.text}>
+                    {children}
+                    <LinkButton size={'middle'} href={hrefMoreDetails} />
+                </div>
             </div>
         </div>
     )

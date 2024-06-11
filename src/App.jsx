@@ -22,7 +22,7 @@ function App() {
                     'src/assets/ИФВД2.jpg',
                     'src/assets/ИФВД3.jpg',
                 ]}
-                s
+                hrefMoreDetails={'https://www.google.com/'}
             >
                 {/* тексты хранятся в файле texts.jsx, чтобы не засорять тут код */}
                 {textIFWD}

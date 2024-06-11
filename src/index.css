@@ -14,7 +14,7 @@
 }
 
 html {
-    overflow: auto;
+    overflow: hidden;
 }
 
 a {
