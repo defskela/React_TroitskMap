@@ -76,6 +76,8 @@ export const ZoomableCanvas = () => {
         var gkhead = new Image()
         window.onload = function () {
             var ctx = canvas.getContext('2d')
+            // Улучшает производительность, но ухудшает качество картинки
+            ctx.imageSmoothingEnabled = false
             trackTransforms(ctx)
 
             function redraw() {
