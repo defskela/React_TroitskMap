@@ -1,0 +1,42 @@
+.categories {
+    width: 150px;
+    height: 100px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.categories button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #efeeee;
+    background-color: #007bff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.categories button:hover {
+    background-color: #0056b3;
+    color: #ffffff;
+}
+
+.categoriesList {
+    display: flex;
+    flex-direction: column;
+    margin-top: 5px;
+    border-radius: 10px; /* Скругленные углы */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Тень вокруг границы */
+    border-width: 0px 2px 2px 2px;
+    border-style: solid;
+    border-color: #007bff;
+}
+
+.oneCategory {
+    text-align: left;
+    margin-top: 5px;
+    margin-left: 5px;
+    margin-bottom: 5px;
+}

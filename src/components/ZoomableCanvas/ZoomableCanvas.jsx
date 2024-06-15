@@ -69,12 +69,15 @@ export const ZoomableCanvas = () => {
     const canvasRef = useRef(null)
 
     useEffect(() => {
+        const CardArea = document.getElementsByClassName('area')[0]
         var canvas = document.getElementById('1PieceOfMap')
-        canvas.width = 5000
-        canvas.height = 6000
+        canvas.width = 2000
+        canvas.height = 1000
         var gkhead = new Image()
         window.onload = function () {
             var ctx = canvas.getContext('2d')
+            // Улучшает производительность, но ухудшает качество картинки
+            ctx.imageSmoothingEnabled = false
             trackTransforms(ctx)
 
             function redraw() {
@@ -99,10 +102,19 @@ export const ZoomableCanvas = () => {
             )
 
             var scaleFactor = 1.1
+            var globalScale = 1
+            var centerX = CardArea.offsetLeft + CardArea.offsetWidth / 2
+            var centerY = CardArea.offsetTop + CardArea.offsetHeight / 2
             var zoom = function (clicks) {
+                // Увеличение в точку клика: перемещение в эту точку, увеличение, перемещение обратно
                 var pt = ctx.transformedPoint(lastX, lastY)
                 ctx.translate(pt.x, pt.y)
+                console.log(pt.x, pt.y, centerX, centerY)
                 var factor = Math.pow(scaleFactor, clicks)
+                globalScale *= factor
+                CardArea.style.transform = `translate(${pt.x}px, ${
+                    pt.y
+                }px) scale(${globalScale}) translate(${-pt.x}px, ${-pt.y}px)`
                 ctx.scale(factor, factor)
                 ctx.translate(-pt.x, -pt.y)
                 redraw()
