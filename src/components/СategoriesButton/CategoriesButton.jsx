@@ -2,13 +2,15 @@ import styles from './CategoriesButton.module.css'
 import { useState } from 'react'
 import { Checkbox } from 'pretty-checkbox-react'
 import '@djthoms/pretty-checkbox'
+import { useEffect } from 'react'
 
 export const CategoriesButton = () => {
+    // Состояния для открытия/закрытия категорий и отображения/скрытия категорий
     const [isOpenCategories, setOpenCategories] = useState(true)
     const [showUniversity, setShowUniversity] = useState(true)
     const [showFontans, setShowFontans] = useState(true)
     const [showLaboratories, setShowLaboratories] = useState(true)
-
+    // Для доступа ко всем элементам категории через цикл
     const fontans = document.querySelectorAll('.fontans')
     const universities = document.querySelectorAll('.universities')
     const laboratories = document.querySelectorAll('.laboratories')
@@ -16,11 +18,22 @@ export const CategoriesButton = () => {
     const toggleCategories = () => {
         setOpenCategories(!isOpenCategories)
     }
-
+    // Функции для открытия/закрытия категорий. Переменная show... не успеет обновить свое
+    // состояние внутри функции из-за отложенного рендеринга в реакте, поэтому ниже используется useEffect
     const toggleUniversity = () => {
-        console.log(showUniversity)
         setShowUniversity(!showUniversity)
-        console.log(showUniversity)
+    }
+
+    const toggleFontans = () => {
+        setShowFontans(!showFontans)
+    }
+
+    const toggleLaboratories = () => {
+        setShowLaboratories(!showLaboratories)
+    }
+    // Когда переменная showUniversity обновится, useEffect сработает и изменит видимость элементов
+    // Вторая зависимость в нашем случае ни на что не влияет, но в теории может пригодиться
+    useEffect(() => {
         if (showUniversity) {
             universities.forEach((university) => {
                 university.style.visibility = 'visible'
@@ -31,10 +44,9 @@ export const CategoriesButton = () => {
                 university.style.visibility = 'hidden'
             })
         }
-    }
+    }, [showUniversity, universities])
 
-    const toggleFontans = () => {
-        setShowFontans(!showFontans)
+    useEffect(() => {
         if (showFontans) {
             fontans.forEach((fontan) => {
                 fontan.style.visibility = 'visible'
@@ -45,10 +57,9 @@ export const CategoriesButton = () => {
                 fontan.style.visibility = 'hidden'
             })
         }
-    }
+    }, [showFontans, fontans])
 
-    const toggleLaboratories = () => {
-        setShowLaboratories(!showLaboratories)
+    useEffect(() => {
         if (showLaboratories) {
             laboratories.forEach((laboratory) => {
                 laboratory.style.visibility = 'visible'
@@ -59,7 +70,8 @@ export const CategoriesButton = () => {
                 laboratory.style.visibility = 'hidden'
             })
         }
-    }
+    }, [showLaboratories, laboratories])
+
     return (
         <div className={styles.categories}>
             <button onClick={toggleCategories}>Категории</button>
@@ -71,7 +83,7 @@ export const CategoriesButton = () => {
                         shape="curve"
                         animation="pulse"
                         checked={showUniversity}
-                        onClick={toggleUniversity}
+                        onChange={toggleUniversity}
                     >
                         Университеты
                     </Checkbox>
@@ -81,7 +93,7 @@ export const CategoriesButton = () => {
                         shape="curve"
                         animation="pulse"
                         checked={showFontans}
-                        onClick={toggleFontans}
+                        onChange={toggleFontans}
                     >
                         Фонтаны
                     </Checkbox>
@@ -91,7 +103,7 @@ export const CategoriesButton = () => {
                         shape="curve"
                         animation="pulse"
                         checked={showLaboratories}
-                        onClick={toggleLaboratories}
+                        onChange={toggleLaboratories}
                     >
                         Лаборатории
                     </Checkbox>
