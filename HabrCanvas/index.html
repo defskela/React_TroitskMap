@@ -12,84 +12,31 @@
         </div>
 
         <script>
+            // Инициализация canvas с помощью Fabric.js
             var canvas = new fabric.Canvas('c')
 
-            var rect = new fabric.Rect({
-                left: 100,
-                top: 100,
-                fill: 'red',
-                width: 20,
-                height: 20,
-                selectable: false,
-                evented: true,
-                hoverCursor: 'pointer', // Или любое другое CSS-значение курсора
-            })
+            // Добавление объекта для демонстрации
+            canvas.add(
+                new fabric.Rect({
+                    left: 100,
+                    top: 100,
+                    fill: 'red',
+                    width: 20,
+                    height: 20,
+                }),
+            )
 
-            canvas.add(rect)
-
-            canvas.on('mouse:down', function (options) {
-                if (options.target && options.target === rect) {
-                    console.log(options.e.clientX, options.e.clientY)
-                }
-            })
-
-            function zoomCanvas(scale) {
-                canvas.setZoom(scale)
-            }
-
-            // Обработчик прокрутки колеса мыши для масштабирования холста
-            var scaleFactor = 1.1
-            var zoom = function (clicks) {
-                // // Увеличение в точку клика: перемещение в эту точку, увеличение, перемещение обратно
-                // var pt = getTransformedPoint(lastX, lastY)
-                // canvas.relativePan(new fabric.Point(pt.x, pt.y))
-                var factor = Math.pow(scaleFactor, clicks)
-                var fabricZoom = canvas.getZoom()
-                fabricZoom *= factor
-                // ctx.scale(factor, factor)
-                // ctx.translate(-pt.x, -pt.y)
-                // redraw()
-
-                // ОЧЕНЬ ВАЖНО// ОЧЕНЬ ВАЖНО// ОЧЕНЬ ВАЖНО// ОЧЕНЬ ВАЖНО// ОЧЕНЬ ВАЖНО// ОЧЕНЬ ВАЖНО// ОЧЕНЬ ВАЖНО// ОЧЕНЬ ВАЖНО// ОЧЕНЬ ВАЖНО// ОЧЕНЬ ВАЖНО// ОЧЕНЬ ВАЖНО// ОЧЕНЬ ВАЖНО// ОЧЕНЬ ВАЖНО// ОЧЕНЬ ВАЖНО// ОЧЕНЬ ВАЖНО// ОЧЕНЬ ВАЖНО
-                canvas.zoomToPoint({ x: lastX, y: lastY }, fabricZoom)
-            }
-
-            var handleScroll = function (evt) {
-                var delta = evt.deltaY ? evt.deltaY : -evt.detail
-                zoom(delta > 0 ? -1 : 1)
-                evt.preventDefault()
-                evt.stopPropagation()
-            }
-
+            // Обработка события прокрутки для масштабирования
             canvas.on('mouse:wheel', function (opt) {
-                // var delta = opt.e.deltaY
-                handleScroll(opt.e)
+                var delta = opt.e.deltaY
+                var zoom = canvas.getZoom()
+                zoom *= 0.999 ** delta
+                if (zoom > 20) zoom = 20
+                if (zoom < 0.01) zoom = 0.01
+                canvas.zoomToPoint({ x: opt.e.offsetX, y: opt.e.offsetY }, zoom)
                 opt.e.preventDefault()
                 opt.e.stopPropagation()
             })
-
-            canvas.on(
-                'mouse:move',
-                function (evt) {
-                    lastX = evt.offsetX || evt.pageX - canvas.offsetLeft
-                    lastY = evt.offsetY || evt.pageY - canvas.offsetTop
-                },
-                false,
-            )
-
-            // function getTransformedPoint(lastX, lastY) {
-            //     var zoom = canvas.getZoom()
-            //     var vpt = canvas.viewportTransform
-            //     return {
-            //         x: (lastX - vpt[4]) / zoom,
-            //         y: (lastY - vpt[5]) / zoom,
-            //     }
-            // }
-
-            // var pt = getTransformedPoint(lastX, lastY)
-
-            // Применяем панорамирование канваса к точке pt
-            // canvas.relativePan(new fabric.Point(pt.x, pt.y))
         </script>
     </body>
 </html>

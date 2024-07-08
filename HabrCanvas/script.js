@@ -1,5 +1,5 @@
-import './styles.css'
 import { fabric } from 'fabric'
+import './styles.css'
 
 /**
  * fabric.js template for bug reports
