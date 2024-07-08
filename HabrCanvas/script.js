@@ -1,14 +1,38 @@
-import { fabric } from 'fabric'
-import './styles.css'
+// Инициализация canvas с помощью Fabric.js
+var canvas = new fabric.Canvas('c')
 
-/**
- * fabric.js template for bug reports
- *
- * Please update the name of the jsfiddle (see Fiddle Options).
- * This templates uses latest dev verison of fabric.js (https://rawgithub.com/kangax/fabric.js/master/dist/fabric.js).
- */
+// Добавление объекта для демонстрации
+canvas.add(
+    new fabric.Rect({
+        left: 100,
+        top: 100,
+        fill: 'red',
+        width: 20,
+        height: 20,
+    }),
+)
 
-// initialize fabric canvas and assign to global windows object for debug
-var canvas = (window._canvas = new fabric.Canvas('c'))
+canvas.forEachObject(function (obj) {
+    obj.set({
+        hasControls: false,
+        hoverCursor: 'pointer',
+    })
+})
 
-// ADD YOUR CODE HERE
+// Обработка события прокрутки для масштабирования
+canvas.on('mouse:wheel', function (opt) {
+    var delta = opt.e.deltaY
+    var zoom = canvas.getZoom()
+    zoom *= 0.999 ** delta
+    if (zoom > 20) zoom = 20
+    if (zoom < 0.01) zoom = 0.01
+    canvas.zoomToPoint({ x: opt.e.offsetX, y: opt.e.offsetY }, zoom)
+    opt.e.preventDefault()
+    opt.e.stopPropagation()
+})
+
+canvas.on('mouse:down', function (opt) {
+    opt.e.preventDefault()
+    opt.e.stopPropagation()
+    console.log('down')
+})

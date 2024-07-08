@@ -10,33 +10,6 @@
         <div id="app">
             <canvas id="c" width="400" height="400"></canvas>
         </div>
-
-        <script>
-            // Инициализация canvas с помощью Fabric.js
-            var canvas = new fabric.Canvas('c')
-
-            // Добавление объекта для демонстрации
-            canvas.add(
-                new fabric.Rect({
-                    left: 100,
-                    top: 100,
-                    fill: 'red',
-                    width: 20,
-                    height: 20,
-                }),
-            )
-
-            // Обработка события прокрутки для масштабирования
-            canvas.on('mouse:wheel', function (opt) {
-                var delta = opt.e.deltaY
-                var zoom = canvas.getZoom()
-                zoom *= 0.999 ** delta
-                if (zoom > 20) zoom = 20
-                if (zoom < 0.01) zoom = 0.01
-                canvas.zoomToPoint({ x: opt.e.offsetX, y: opt.e.offsetY }, zoom)
-                opt.e.preventDefault()
-                opt.e.stopPropagation()
-            })
-        </script>
+        <script src="script.js"></script>
     </body>
 </html>
