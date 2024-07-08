@@ -26,18 +26,21 @@ export const ZoomableCanvas = () => {
                     angle: 0,
                     opacity: 4.0,
                     hasControls: false,
-                    selectable: true, // Делает изображение невыбираемым и, следовательно, неперемещаемым
-                    // или
+                    selectable: true,
                     lockMovementX: true,
                     lockMovementY: true, // Блокирует перемещение по обеим осям
                     hoverCursor: 'pointer',
+                })
+
+                img.on('mousedown', function () {
+                    setOpen(true)
                 })
 
                 canvas.add(img)
             })
         }
 
-        const fstImg = addToCanvas(400, 400, reactImage)
+        addToCanvas(400, 400, reactImage)
 
         // Обработка события прокрутки для масштабирования
         const handleMouseWheel = (opt) => {
