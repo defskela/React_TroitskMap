@@ -69,7 +69,6 @@ export const ZoomableCanvas = () => {
     const canvasRef = useRef(null)
 
     useEffect(() => {
-        const CardArea = document.getElementsByClassName('area')[0]
         var canvas = document.getElementById('1PieceOfMap')
         canvas.width = 2000
         canvas.height = 1000
@@ -98,34 +97,27 @@ export const ZoomableCanvas = () => {
                     lastX = evt.offsetX || evt.pageX - canvas.offsetLeft
                     lastY = evt.offsetY || evt.pageY - canvas.offsetTop
                 },
-                false
+                false,
             )
 
             var scaleFactor = 1.1
-            var globalScale = 1
-            var centerX = CardArea.offsetLeft + CardArea.offsetWidth / 2
-            var centerY = CardArea.offsetTop + CardArea.offsetHeight / 2
             var zoom = function (clicks) {
                 // Увеличение в точку клика: перемещение в эту точку, увеличение, перемещение обратно
                 var pt = ctx.transformedPoint(lastX, lastY)
                 ctx.translate(pt.x, pt.y)
-                console.log(pt.x, pt.y, centerX, centerY)
                 var factor = Math.pow(scaleFactor, clicks)
-                globalScale *= factor
-                CardArea.style.transform = `translate(${pt.x}px, ${
-                    pt.y
-                }px) scale(${globalScale}) translate(${-pt.x}px, ${-pt.y}px)`
                 ctx.scale(factor, factor)
                 ctx.translate(-pt.x, -pt.y)
                 redraw()
             }
 
             var handleScroll = function (evt) {
+                console.log('scroll')
                 var delta = evt.wheelDelta
                     ? evt.wheelDelta / 40
                     : evt.detail
-                    ? -evt.detail
-                    : 0
+                      ? -evt.detail
+                      : 0
                 if (delta) zoom(delta)
                 return evt.preventDefault() && false
             }

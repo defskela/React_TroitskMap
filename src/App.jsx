@@ -3,7 +3,7 @@ import './App.css'
 import { CardElement } from './components/CardElement/CardElement'
 import { textIFWD } from './texts.jsx'
 // import { PieceOfMap } from './components/pieceOfMap/pieceofMap'
-// import { ZoomableCanvas } from './components/ZoomableCanvas/ZoomableCanvas'
+import { ZoomableCanvas } from './components/ZoomableCanvas/ZoomableCanvas'
 import { CategoriesButton } from './components/СategoriesButton/CategoriesButton.jsx'
 
 function App() {
@@ -31,7 +31,7 @@ function App() {
             </CardElement>
             {/* Добавить эту кнопку в layouts т,к от того, в каком места она добавлена, ничего не меняется */}
             <CategoriesButton />
-            <h1 className="fontans">Фонтан 1</h1>
+            {/* <h1 className="fontans">Фонтан 1</h1>
             <h1 className="laboratories">Лаборатория 1</h1>
             <h1 className="universities">Университет 3</h1>
             <h1 className="fontans">Фонтан 2</h1>
@@ -39,8 +39,8 @@ function App() {
             <h1 className="fontans">Фонтан 3</h1>
             <h1 className="universities">Университет 2</h1>
             <h1 className="laboratories">Лаборатория 3</h1>
-            <h1 className="laboratories">Лаборатория 2</h1>
-            {/* <ZoomableCanvas /> */}
+            <h1 className="laboratories">Лаборатория 2</h1> */}
+            <ZoomableCanvas />
         </div>
     )
 }
