@@ -1,139 +1,118 @@
-import { useEffect, useRef } from 'react'
-import map from '../../assets/1.svg'
-
-function trackTransforms(ctx) {
-    var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
-    var xform = svg.createSVGMatrix()
-    ctx.getTransform = function () {
-        return xform
-    }
-
-    var savedTransforms = []
-    var save = ctx.save
-    ctx.save = function () {
-        savedTransforms.push(xform.translate(0, 0))
-        return save.call(ctx)
-    }
-    var restore = ctx.restore
-    ctx.restore = function () {
-        xform = savedTransforms.pop()
-        return restore.call(ctx)
-    }
-
-    var scale = ctx.scale
-    ctx.scale = function (sx, sy) {
-        xform = xform.scaleNonUniform(sx, sy)
-        return scale.call(ctx, sx, sy)
-    }
-    var rotate = ctx.rotate
-    ctx.rotate = function (radians) {
-        xform = xform.rotate((radians * 180) / Math.PI)
-        return rotate.call(ctx, radians)
-    }
-    var translate = ctx.translate
-    ctx.translate = function (dx, dy) {
-        xform = xform.translate(dx, dy)
-        return translate.call(ctx, dx, dy)
-    }
-    var transform = ctx.transform
-    ctx.transform = function (a, b, c, d, e, f) {
-        var m2 = svg.createSVGMatrix()
-        m2.a = a
-        m2.b = b
-        m2.c = c
-        m2.d = d
-        m2.e = e
-        m2.f = f
-        xform = xform.multiply(m2)
-        return transform.call(ctx, a, b, c, d, e, f)
-    }
-    var setTransform = ctx.setTransform
-    ctx.setTransform = function (a, b, c, d, e, f) {
-        xform.a = a
-        xform.b = b
-        xform.c = c
-        xform.d = d
-        xform.e = e
-        xform.f = f
-        return setTransform.call(ctx, a, b, c, d, e, f)
-    }
-    var pt = svg.createSVGPoint()
-    ctx.transformedPoint = function (x, y) {
-        pt.x = x
-        pt.y = y
-        return pt.matrixTransform(xform.inverse())
-    }
-}
+import { fabric } from 'fabric'
+import { FabricJSCanvas, useFabricJSEditor } from 'fabricjs-react'
+import { useEffect, useState } from 'react'
+import { CardElement } from '../CardElement/CardElement'
+import reactImage from './react.svg' // Импорт изображения
+import { textIFWD } from './texts.jsx'
+import map from 'C://React_projects/TroitskMap/src/assets/jpgmax.jpg'
 
 export const ZoomableCanvas = () => {
-    const canvasRef = useRef(null)
+    const { editor, onReady } = useFabricJSEditor()
+    const [open, setOpen] = useState(false)
 
     useEffect(() => {
-        const CardArea = document.getElementsByClassName('area')[0]
-        var canvas = document.getElementById('1PieceOfMap')
-        canvas.width = 2000
-        canvas.height = 1000
-        var gkhead = new Image()
-        window.onload = function () {
-            var ctx = canvas.getContext('2d')
-            // Улучшает производительность, но ухудшает качество картинки
-            ctx.imageSmoothingEnabled = false
-            trackTransforms(ctx)
+        if (!editor) return
 
-            function redraw() {
-                var p1 = ctx.transformedPoint(0, 0)
-                var p2 = ctx.transformedPoint(canvas.width, canvas.height)
-                ctx.clearRect(p1.x, p1.y, p2.x - p1.x, p2.y - p1.y)
+        const canvas = editor.canvas
+        canvas.setWidth(7500) // Ширина холста
+        canvas.setHeight(7500) // Высота холста
 
-                ctx.drawImage(gkhead, 200, 50)
-            }
-            redraw()
+        function addToCanvas(
+            path,
+            left = 0,
+            top = 0,
+            onClickFunction = () => {}
+        ) {
+            // Добавление объекта для демонстрации
+            fabric.Image.fromURL(path, function (img) {
+                // Можно задать начальные параметры для изображения
+                if (path != map) {
+                    img.set({
+                        left: left,
+                        top: top,
+                        angle: 0,
+                        opacity: 4.0,
+                        hasControls: false,
+                        selectable: true,
+                        lockMovementX: true,
+                        lockMovementY: true, // Блокирует перемещение по обеим осям
+                        hoverCursor: 'pointer',
+                    })
 
-            var lastX = canvas.width / 2
-            var lastY = canvas.height / 2
+                    img.on('mousedown', function () {
+                        onClickFunction()
+                    })
+                } else {
+                    img.set({
+                        left: 0,
+                        top: 0,
+                        angle: 0,
+                        opacity: 4.0,
+                        hasControls: false,
+                        selectable: false,
+                        lockMovementX: true,
+                        lockMovementY: true, // Блокирует перемещение по обеим осям
+                        hoverCursor: 'default',
+                    })
+                }
 
-            canvas.addEventListener(
-                'mousemove',
-                function (evt) {
-                    lastX = evt.offsetX || evt.pageX - canvas.offsetLeft
-                    lastY = evt.offsetY || evt.pageY - canvas.offsetTop
-                },
-                false
-            )
-
-            var scaleFactor = 1.1
-            var globalScale = 1
-            var centerX = CardArea.offsetLeft + CardArea.offsetWidth / 2
-            var centerY = CardArea.offsetTop + CardArea.offsetHeight / 2
-            var zoom = function (clicks) {
-                // Увеличение в точку клика: перемещение в эту точку, увеличение, перемещение обратно
-                var pt = ctx.transformedPoint(lastX, lastY)
-                ctx.translate(pt.x, pt.y)
-                console.log(pt.x, pt.y, centerX, centerY)
-                var factor = Math.pow(scaleFactor, clicks)
-                globalScale *= factor
-                CardArea.style.transform = `translate(${pt.x}px, ${
-                    pt.y
-                }px) scale(${globalScale}) translate(${-pt.x}px, ${-pt.y}px)`
-                ctx.scale(factor, factor)
-                ctx.translate(-pt.x, -pt.y)
-                redraw()
-            }
-
-            var handleScroll = function (evt) {
-                var delta = evt.wheelDelta
-                    ? evt.wheelDelta / 40
-                    : evt.detail
-                    ? -evt.detail
-                    : 0
-                if (delta) zoom(delta)
-                return evt.preventDefault() && false
-            }
-            canvas.addEventListener('DOMMouseScroll', handleScroll, false)
-            canvas.addEventListener('mousewheel', handleScroll, false)
+                canvas.add(img)
+                if (path != map) {
+                    canvas.moveTo(img, 1) // Установка z-index для изображения
+                }
+            })
         }
-        gkhead.src = map
-    }, [])
 
-    return <canvas ref={canvasRef} id="1PieceOfMap" />
+        addToCanvas(map)
+        addToCanvas(reactImage, 400, 400, () => setOpen(true))
+
+        // Обработка события прокрутки для масштабирования
+        const handleMouseWheel = (opt) => {
+            var delta = opt.e.deltaY
+            var zoom = canvas.getZoom()
+            zoom *= 0.999 ** delta
+            if (zoom > 20) zoom = 20
+            if (zoom < 0.01) zoom = 0.01
+            canvas.zoomToPoint({ x: opt.e.offsetX, y: opt.e.offsetY }, zoom)
+            opt.e.preventDefault()
+            opt.e.stopPropagation()
+        }
+
+        canvas.on('mouse:wheel', handleMouseWheel)
+
+        // canvas.on('mouse:down', function (opt) {
+        //     opt.e.preventDefault()
+        //     opt.e.stopPropagation()
+        //     if (opt.target == fstImg) {
+        //         console.log('fstImg')
+        //     }
+        //     console.log('down')
+        // })
+
+        // Очистка обработчиков
+        return () => {
+            canvas.off('mouse:wheel', handleMouseWheel)
+            canvas.off('mouse:down')
+        }
+    }, [editor]) // Перезапускать эффект, если editor изменяется
+
+    return (
+        <div>
+            <FabricJSCanvas className="sample-canvas" onReady={onReady} />
+            <CardElement
+                open={open}
+                setOpen={setOpen}
+                header={'lorem'}
+                images={[
+                    'src/assets/ИФВД1.jpg',
+                    'src/assets/ИФВД2.jpg',
+                    'src/assets/ИФВД3.jpg',
+                ]}
+                hrefMoreDetails={'https://www.google.com/'}
+            >
+                {/* тексты хранятся в файле texts.jsx, чтобы не засорять тут код */}
+                {textIFWD}
+            </CardElement>
+        </div>
+    )
 }

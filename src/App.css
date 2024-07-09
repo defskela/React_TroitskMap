@@ -8,8 +8,12 @@
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    overflow: visible;
+    /* overflow-y: hidden; */
     user-select: none;
+}
+
+body {
+    overflow: hidden;
 }
 
 .App button {
