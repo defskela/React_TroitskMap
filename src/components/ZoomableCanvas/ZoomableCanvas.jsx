@@ -13,10 +13,32 @@ export const ZoomableCanvas = () => {
         if (!editor) return
 
         const canvas = editor.canvas
-        canvas.setWidth(800) // Ширина холста
-        canvas.setHeight(600) // Высота холста
+        canvas.setWidth(15959) // Ширина холста
+        canvas.setHeight(8977) // Высота холста
 
-        function addToCanvas(left, top, path) {
+        // fabric.Image.fromURL(map, function (img) {
+        //     canvas.setBackgroundImage(img, {
+        //         originX: 'left',
+        //         originY: 'top',
+        //         scaleX: canvas.width / img.width,
+        //         scaleY: canvas.height / img.height,
+        //     })
+        // })
+
+        // fabric.Image.fromURL(map, function (img) {
+        //     img.set({
+        //         left: 0,
+        //         top: 0,
+        //         angle: 0,
+        //         opacity: 4.0,
+        //         hasControls: false,
+        //         selectable: true,
+        //         lockMovementX: true,
+        //         lockMovementY: true, // Блокирует перемещение по обеим осям
+        //     })
+        // })
+
+        function addToCanvas(left, top, path, onClickFunction) {
             // Добавление объекта для демонстрации
             fabric.Image.fromURL(path, function (img) {
                 // Можно задать начальные параметры для изображения
@@ -33,14 +55,18 @@ export const ZoomableCanvas = () => {
                 })
 
                 img.on('mousedown', function () {
-                    setOpen(true)
+                    onClickFunction()
                 })
 
                 canvas.add(img)
+                canvas.renderAll()
             })
         }
+        const onClickReactLogo = () => {
+            setOpen(true)
+        }
 
-        addToCanvas(400, 400, reactImage)
+        addToCanvas(400, 400, reactImage, onClickReactLogo)
 
         // Обработка события прокрутки для масштабирования
         const handleMouseWheel = (opt) => {
