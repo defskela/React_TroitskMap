@@ -14,8 +14,8 @@ export const ZoomableCanvas = () => {
         if (!editor) return
 
         const canvas = editor.canvas
-        canvas.setWidth(7500) // Ширина холста
-        canvas.setHeight(7500) // Высота холста
+        canvas.setWidth(window.innerWidth) // Ширина холста
+        canvas.setHeight(window.innerHeight) // Высота холста
 
         function addToCanvas(
             path,
@@ -55,7 +55,10 @@ export const ZoomableCanvas = () => {
                         hoverCursor: 'default',
                     })
                 }
-
+                if (path == map) {
+                    img.scaleToWidth(canvas.width)
+                    // img.scaleToHeight(canvas.height)
+                }
                 canvas.add(img)
                 if (path != map) {
                     canvas.moveTo(img, 1) // Установка z-index для изображения
