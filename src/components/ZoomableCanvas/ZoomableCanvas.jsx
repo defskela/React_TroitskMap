@@ -75,13 +75,42 @@ export const ZoomableCanvas = () => {
             var zoom = canvas.getZoom()
             zoom *= 0.999 ** delta
             if (zoom > 20) zoom = 20
-            if (zoom < 0.01) zoom = 0.01
+            if (zoom < 1) zoom = 1
             canvas.zoomToPoint({ x: opt.e.offsetX, y: opt.e.offsetY }, zoom)
             opt.e.preventDefault()
             opt.e.stopPropagation()
         }
 
         canvas.on('mouse:wheel', handleMouseWheel)
+        let isDragging = false
+        let lastPosX = 0
+        let lastPosY = 0
+
+        canvas.on('mouse:down', function (opt) {
+            const evt = opt.e
+            isDragging = true
+            lastPosX = evt.clientX
+            lastPosY = evt.clientY
+            canvas.selection = false // Отключить выбор объектов на холсте при перетаскивании
+        })
+
+        canvas.on('mouse:move', function (opt) {
+            if (isDragging) {
+                const e = opt.e
+                const vpt = this.viewportTransform
+                vpt[4] += e.clientX - lastPosX
+                vpt[5] += e.clientY - lastPosY
+                this.requestRenderAll()
+                lastPosX = e.clientX
+                lastPosY = e.clientY
+                // Поставить ограничение, чтобы изображение не уходило за пределы холста
+            }
+        })
+
+        canvas.on('mouse:up', function () {
+            isDragging = false
+            canvas.selection = true // Включить обратно выбор объектов на холсте
+        })
 
         // canvas.on('mouse:down', function (opt) {
         //     opt.e.preventDefault()
