@@ -9,6 +9,9 @@ import map from 'C://React_projects/TroitskMap/src/assets/jpgmax.jpg'
 export const ZoomableCanvas = () => {
     const { editor, onReady } = useFabricJSEditor()
     const [open, setOpen] = useState(false)
+    let takts = 0
+    let myMoveX = 0
+    let myMoveY = 0
 
     useEffect(() => {
         if (!editor) return
@@ -57,6 +60,21 @@ export const ZoomableCanvas = () => {
                 }
                 if (path == map) {
                     img.scaleToWidth(canvas.width)
+                    canvas.on('mouse:move', function (opt) {
+                        if (isDragging) {
+                            const e = opt.e
+                            const vpt = this.viewportTransform
+                            vpt[4] += e.clientX - lastPosX
+                            vpt[5] += e.clientY - lastPosY
+                            myMoveX += e.clientX - lastPosX
+                            myMoveY += e.clientY - lastPosY
+                            console.log('myMoveX', myMoveX, 'myMoveY', myMoveY)
+                            this.requestRenderAll()
+                            lastPosX = e.clientX
+                            lastPosY = e.clientY
+                            // Поставить ограничение, чтобы изображение не уходило за пределы холста
+                        }
+                    })
                     // img.scaleToHeight(canvas.height)
                 }
                 canvas.add(img)
@@ -72,8 +90,18 @@ export const ZoomableCanvas = () => {
         // Обработка события прокрутки для масштабирования
         const handleMouseWheel = (opt) => {
             var delta = opt.e.deltaY
+            delta > 0 ? takts++ : takts--
             var zoom = canvas.getZoom()
             zoom *= 0.999 ** delta
+            if (delta > 0) {
+                console.log()
+                const vpt = canvas.viewportTransform
+                vpt[4] += myMoveX / takts
+                vpt[5] += myMoveY / takts
+                myMoveX += myMoveX / takts
+                myMoveY += myMoveY / takts
+                console.log('myMoveX2', myMoveX, 'myMoveY2', myMoveY)
+            }
             if (zoom > 20) zoom = 20
             if (zoom < 1) zoom = 1
             canvas.zoomToPoint({ x: opt.e.offsetX, y: opt.e.offsetY }, zoom)
@@ -92,19 +120,6 @@ export const ZoomableCanvas = () => {
             lastPosX = evt.clientX
             lastPosY = evt.clientY
             canvas.selection = false // Отключить выбор объектов на холсте при перетаскивании
-        })
-
-        canvas.on('mouse:move', function (opt) {
-            if (isDragging) {
-                const e = opt.e
-                const vpt = this.viewportTransform
-                vpt[4] += e.clientX - lastPosX
-                vpt[5] += e.clientY - lastPosY
-                this.requestRenderAll()
-                lastPosX = e.clientX
-                lastPosY = e.clientY
-                // Поставить ограничение, чтобы изображение не уходило за пределы холста
-            }
         })
 
         canvas.on('mouse:up', function () {
