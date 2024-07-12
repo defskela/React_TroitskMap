@@ -9,9 +9,6 @@ import map from 'C://React_projects/TroitskMap/src/assets/jpgmax.jpg'
 export const ZoomableCanvas = () => {
     const { editor, onReady } = useFabricJSEditor()
     const [open, setOpen] = useState(false)
-    let takts = 0
-    let myMoveX = 0
-    let myMoveY = 0
 
     useEffect(() => {
         if (!editor) return
@@ -66,9 +63,6 @@ export const ZoomableCanvas = () => {
                             const vpt = this.viewportTransform
                             vpt[4] += e.clientX - lastPosX
                             vpt[5] += e.clientY - lastPosY
-                            myMoveX += e.clientX - lastPosX
-                            myMoveY += e.clientY - lastPosY
-                            console.log('myMoveX', myMoveX, 'myMoveY', myMoveY)
                             this.requestRenderAll()
                             lastPosX = e.clientX
                             lastPosY = e.clientY
@@ -87,23 +81,62 @@ export const ZoomableCanvas = () => {
         addToCanvas(map)
         addToCanvas(reactImage, 400, 400, () => setOpen(true))
 
+        console.log(
+            'Startvpt',
+            canvas.viewportTransform[4],
+            canvas.viewportTransform[5]
+        )
+
         // Обработка события прокрутки для масштабирования
         const handleMouseWheel = (opt) => {
             var delta = opt.e.deltaY
-            delta > 0 ? takts++ : takts--
+            console.log('delta', delta)
             var zoom = canvas.getZoom()
             zoom *= 0.999 ** delta
-            if (delta > 0) {
-                console.log()
-                const vpt = canvas.viewportTransform
-                vpt[4] += myMoveX / takts
-                vpt[5] += myMoveY / takts
-                myMoveX += myMoveX / takts
-                myMoveY += myMoveY / takts
-                console.log('myMoveX2', myMoveX, 'myMoveY2', myMoveY)
-            }
             if (zoom > 20) zoom = 20
             if (zoom < 1) zoom = 1
+            if (delta > 0 && zoom > 1) {
+                console.log('delta > 0')
+                if (zoom > 1 && delta > 0) {
+                    // Рассчитываем коэффициент интерполяции
+                    // Начальное и конечное значения для интерполяции
+                    let interpolationFactor
+                    if (zoom > 1) {
+                        // Плавное изменение от zoom до 1
+                        interpolationFactor = (zoom - 1) / (20 - 1) // Максимальный зум равен 10
+                    } else {
+                        interpolationFactor = 1 // Когда zoom <= 1, интерполяция не требуется
+                    }
+                    console.log('interpolationFactor', interpolationFactor)
+
+                    // Получаем текущий viewportTransform
+                    let vpt = canvas.viewportTransform
+
+                    // Плавно обновляем vpt[4] и vpt[5] к 0, если zoom <= 1
+                    vpt[4] = vpt[4] * (1 - interpolationFactor)
+                    vpt[5] = vpt[5] * (1 - interpolationFactor)
+
+                    // Применяем обновленный viewportTransform
+                    canvas.setViewportTransform(vpt)
+
+                    console.log('zoom', zoom)
+                    canvas.zoomToPoint(
+                        { x: opt.e.offsetX, y: opt.e.offsetY },
+                        zoom
+                    )
+                    opt.e.preventDefault()
+                    opt.e.stopPropagation()
+                }
+            } else if (zoom == 1 && delta > 0) {
+                canvas.viewportTransform[4] = 0
+                canvas.viewportTransform[5] = 0
+            }
+            console.log(
+                'vpt',
+                canvas.viewportTransform[4],
+                canvas.viewportTransform[5]
+            )
+            console.log('zoom', zoom)
             canvas.zoomToPoint({ x: opt.e.offsetX, y: opt.e.offsetY }, zoom)
             opt.e.preventDefault()
             opt.e.stopPropagation()
