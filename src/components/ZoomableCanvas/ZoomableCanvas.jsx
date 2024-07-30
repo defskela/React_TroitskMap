@@ -6,14 +6,22 @@ import reactImage from './react.svg' // Импорт изображения
 import { textIFWD } from './texts.jsx'
 import map from 'C://React_projects/TroitskMap/src/assets/jpgmax.jpg'
 
+// Сам холст с объектами на нём
 export const ZoomableCanvas = () => {
+    // Специальный canvas из библиотеки fabric
     const { editor, onReady } = useFabricJSEditor()
     const [open, setOpen] = useState(false)
 
     useEffect(() => {
         if (!editor) return
 
+        let isDragging = false
+        let lastPosX = 0
+        let lastPosY = 0
+
         const canvas = editor.canvas
+        // Сохраняем пропорции картинки. 10000 и 5625 - начальные значения картинки. Посмотрел в Paint
+        // Чем больше уменьшаем - тем быстрее загрузится и тем меньше будет лагов
         canvas.setWidth(10000 / 3) // Ширина холста
         canvas.setHeight(5625 / 3) // Высота холста
 
@@ -23,22 +31,25 @@ export const ZoomableCanvas = () => {
             top = 0,
             onClickFunction = () => {}
         ) {
-            // Добавление объекта для демонстрации
             fabric.Image.fromURL(path, function (img) {
-                // Можно задать начальные параметры для изображения
+                // Если объект не является картой (не расположен по пути map)
                 if (path != map) {
+                    // Используем переданные значения
                     img.set({
                         left: left,
                         top: top,
                         angle: 0,
                         opacity: 4.0,
+                        // Пользователь не может изменять размеры
                         hasControls: false,
+                        // Для передвижения по карте
                         selectable: true,
                         lockMovementX: true,
                         lockMovementY: true, // Блокирует перемещение по обеим осям
+                        // курсор при наведении на объект карты становится pointer
                         hoverCursor: 'pointer',
                     })
-
+                    // При нажатии вызывает функцию onClickFunction
                     img.on('mousedown', function () {
                         onClickFunction()
                     })
@@ -55,29 +66,37 @@ export const ZoomableCanvas = () => {
                         hoverCursor: 'default',
                     })
                 }
+                // Если объект - карта
                 if (path == map) {
+                    // Подстраиваем размеры под canvas
                     img.scaleToWidth(canvas.width)
+                    // обработчик
                     canvas.on('mouse:move', function (opt) {
                         if (isDragging) {
-                            console.log('drag')
                             const e = opt.e
-                            const delta_move_coords =
+                            const delta_move_coords_x =
                                 (e.clientX - lastPosX) / canvas.getZoom()
+                            const delta_move_coords_y =
+                                (e.clientY - lastPosY) / canvas.getZoom()
 
-                            if (img.left + delta_move_coords <= 0) {
-                                img.left += delta_move_coords
-                                img.top += delta_move_coords
-                                this.requestRenderAll()
+                            if (
+                                img.left + delta_move_coords_x <= 0 &&
+                                img.left + delta_move_coords_x >=
+                                    -img.width * img.scaleX + window.innerWidth
+                            ) {
+                                img.left += delta_move_coords_x
                                 lastPosX = e.clientX
-                                lastPosY = e.clientY
-                            } else {
-                                console.log(
-                                    'imgleft',
-                                    img.left + delta_move_coords,
-                                    'window.innerWidth',
-                                    window.innerWidth
-                                )
                             }
+                            if (
+                                img.top + delta_move_coords_y <= 0 &&
+                                img.top + delta_move_coords_y >=
+                                    -img.height * img.scaleY +
+                                        window.innerHeight
+                            ) {
+                                img.top += delta_move_coords_y
+                                lastPosY = e.clientY
+                            }
+                            this.requestRenderAll()
                         }
                     })
                     // img.scaleToHeight(canvas.height)
@@ -112,9 +131,6 @@ export const ZoomableCanvas = () => {
         }
 
         canvas.on('mouse:wheel', handleMouseWheel)
-        let isDragging = false
-        let lastPosX = 0
-        let lastPosY = 0
 
         canvas.on('mouse:down', function (opt) {
             const evt = opt.e
