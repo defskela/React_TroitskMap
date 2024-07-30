@@ -70,15 +70,18 @@ export const ZoomableCanvas = () => {
                 if (path == map) {
                     // Подстраиваем размеры под canvas
                     img.scaleToWidth(canvas.width)
-                    // обработчик
+                    // обработчик передвижения. Находится именно тут, чтобы мог обращаться к img
                     canvas.on('mouse:move', function (opt) {
+                        // Если до перетаскивания мыши мы нажали, то начинается перемещение
                         if (isDragging) {
+                            // Тут хранится много полезного о активном объекте
                             const e = opt.e
+                            // С учетом zoom, чтобы при приближении всё оставалось плавным
                             const delta_move_coords_x =
                                 (e.clientX - lastPosX) / canvas.getZoom()
                             const delta_move_coords_y =
                                 (e.clientY - lastPosY) / canvas.getZoom()
-
+                            // Смотрим границы с двух сторон по осям X и Y
                             if (
                                 img.left + delta_move_coords_x <= 0 &&
                                 img.left + delta_move_coords_x >=
@@ -96,6 +99,7 @@ export const ZoomableCanvas = () => {
                                 img.top += delta_move_coords_y
                                 lastPosY = e.clientY
                             }
+                            // Обновляем объект
                             this.requestRenderAll()
                         }
                     })
@@ -103,35 +107,34 @@ export const ZoomableCanvas = () => {
                 }
                 canvas.add(img)
                 if (path != map) {
-                    canvas.moveTo(img, 1) // Установка z-index для изображения
+                    // Установка z-index для изображения, чтобы объекты были поверх карты
+                    canvas.moveTo(img, 1)
                 }
             })
         }
 
         addToCanvas(map)
+        // картинка, смещение по x и y, функция открытия. Можно просто вставлять это везде
         addToCanvas(reactImage, 400, 400, () => setOpen(true))
 
-        console.log(
-            'Startvpt',
-            canvas.viewportTransform[4],
-            canvas.viewportTransform[5]
-        )
-
-        // Обработка события прокрутки для масштабирования
+        // Масштабирование в точку
         const handleMouseWheel = (opt) => {
-            var scrollDelta = opt.e.deltaY
-            console.log('delta', scrollDelta)
-            var zoom = canvas.getZoom()
+            const scrollDelta = opt.e.deltaY
+            let zoom = canvas.getZoom()
+            // scrollDelta может быть как положительной, так и отрицательной
             zoom *= 0.999 ** scrollDelta
+            // Границы масштабирования
             if (zoom > 20) zoom = 20
             if (zoom < 1) zoom = 1
+            // Масштабирование в точку
             canvas.zoomToPoint({ x: opt.e.offsetX, y: opt.e.offsetY }, zoom)
+            // Просто нужные штуки, без которых будут проблемы
             opt.e.preventDefault()
             opt.e.stopPropagation()
         }
-
+        // Обработчик прокрутки, который вызывает функцию выше
         canvas.on('mouse:wheel', handleMouseWheel)
-
+        // Нажатие для начала перемещения по карте
         canvas.on('mouse:down', function (opt) {
             const evt = opt.e
             isDragging = true
@@ -139,20 +142,11 @@ export const ZoomableCanvas = () => {
             lastPosY = evt.clientY
             canvas.selection = false // Отключить выбор объектов на холсте при перетаскивании
         })
-
+        // Отпускание для завершения перемещения по карте
         canvas.on('mouse:up', function () {
             isDragging = false
             canvas.selection = true // Включить обратно выбор объектов на холсте
         })
-
-        // canvas.on('mouse:down', function (opt) {
-        //     opt.e.preventDefault()
-        //     opt.e.stopPropagation()
-        //     if (opt.target == fstImg) {
-        //         console.log('fstImg')
-        //     }
-        //     console.log('down')
-        // })
 
         // Очистка обработчиков
         return () => {
@@ -164,6 +158,7 @@ export const ZoomableCanvas = () => {
     return (
         <div>
             <FabricJSCanvas className="sample-canvas" onReady={onReady} />
+            {/* Вот такой кучкой передаем все метки на карте */}
             <CardElement
                 open={open}
                 setOpen={setOpen}
