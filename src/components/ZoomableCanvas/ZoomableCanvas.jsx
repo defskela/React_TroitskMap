@@ -60,27 +60,26 @@ export const ZoomableCanvas = () => {
                     canvas.on('mouse:move', function (opt) {
                         if (isDragging) {
                             const e = opt.e
-                            // if (
-                            //     (img.left += e.clientX - lastPosX) < 0 &&
-                            //     (img.left += e.clientX - lastPosX) >
-                            // )
-                            img.left +=
+                            const delta_move_coords =
                                 (e.clientX - lastPosX) / canvas.getZoom()
-                            img.top += (e.clientY - lastPosY) / canvas.getZoom()
-                            this.requestRenderAll()
-                            lastPosX = e.clientX
-                            lastPosY = e.clientY
-                            // Предполагаем, что img - это объект изображения, добавленный на холст
-                            // Предполагаем, что img - это объект изображения, добавленный на холст
 
-                            console.log(
-                                'left',
-                                img.left,
-                                'top',
-                                img.top,
-                                'scale',
-                                canvas.getZoom()
-                            )
+                            if (
+                                (img.left += delta_move_coords) <=
+                                -window.innerWidth
+                            ) {
+                                console.log(
+                                    'delta',
+                                    delta_move_coords,
+                                    'wiW',
+                                    window.innerWidth
+                                )
+                                img.left += delta_move_coords
+                                img.top += delta_move_coords
+                                this.requestRenderAll()
+                                lastPosX = e.clientX
+                                lastPosY = e.clientY
+                            }
+                            console.log('left', img.left - window.innerWidth)
 
                             // Поставить ограничение, чтобы изображение не уходило за пределы холста
                         }
