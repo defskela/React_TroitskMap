@@ -59,29 +59,25 @@ export const ZoomableCanvas = () => {
                     img.scaleToWidth(canvas.width)
                     canvas.on('mouse:move', function (opt) {
                         if (isDragging) {
+                            console.log('drag')
                             const e = opt.e
                             const delta_move_coords =
                                 (e.clientX - lastPosX) / canvas.getZoom()
 
-                            if (
-                                (img.left += delta_move_coords) <=
-                                -window.innerWidth
-                            ) {
-                                console.log(
-                                    'delta',
-                                    delta_move_coords,
-                                    'wiW',
-                                    window.innerWidth
-                                )
+                            if (img.left + delta_move_coords <= 0) {
                                 img.left += delta_move_coords
                                 img.top += delta_move_coords
                                 this.requestRenderAll()
                                 lastPosX = e.clientX
                                 lastPosY = e.clientY
+                            } else {
+                                console.log(
+                                    'imgleft',
+                                    img.left + delta_move_coords,
+                                    'window.innerWidth',
+                                    window.innerWidth
+                                )
                             }
-                            console.log('left', img.left - window.innerWidth)
-
-                            // Поставить ограничение, чтобы изображение не уходило за пределы холста
                         }
                     })
                     // img.scaleToHeight(canvas.height)
