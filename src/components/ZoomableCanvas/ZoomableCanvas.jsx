@@ -81,14 +81,21 @@ export const ZoomableCanvas = () => {
                                 (e.clientX - lastPosX) / canvas.getZoom()
                             const delta_move_coords_y =
                                 (e.clientY - lastPosY) / canvas.getZoom()
+                            const objects = canvas.getObjects()
                             // Смотрим границы с двух сторон по осям X и Y
                             if (
                                 img.left + delta_move_coords_x <= 0 &&
                                 img.left + delta_move_coords_x >=
                                     -img.width * img.scaleX + window.innerWidth
                             ) {
-                                img.left += delta_move_coords_x
                                 lastPosX = e.clientX
+                                objects.forEach((obj) => {
+                                    // Проверяем, является ли объект изображением
+                                    if (obj.type === 'image') {
+                                        obj.left += delta_move_coords_x
+                                        obj.setCoords()
+                                    }
+                                })
                             }
                             if (
                                 img.top + delta_move_coords_y <= 0 &&
@@ -96,8 +103,14 @@ export const ZoomableCanvas = () => {
                                     -img.height * img.scaleY +
                                         window.innerHeight
                             ) {
-                                img.top += delta_move_coords_y
                                 lastPosY = e.clientY
+                                objects.forEach((obj) => {
+                                    // Проверяем, является ли объект изображением
+                                    if (obj.type === 'image') {
+                                        obj.top += delta_move_coords_y
+                                        obj.setCoords()
+                                    }
+                                })
                             }
                             // Обновляем объект
                             this.requestRenderAll()
