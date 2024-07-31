@@ -3,14 +3,31 @@ import { FabricJSCanvas, useFabricJSEditor } from 'fabricjs-react'
 import { useEffect, useState } from 'react'
 import { CardElement } from '../CardElement/CardElement'
 import reactImage from './react.svg' // Импорт изображения
-import { textIFWD } from './texts.jsx'
+import {
+    textIAI,
+    textIFT,
+    textIFWD,
+    textIZMIRAN,
+    textMNS,
+    textTISNYM,
+} from './texts.jsx'
 import map from 'C://React_projects/TroitskMap/src/assets/jpgmax.jpg'
+import iai from 'C://React_projects/TroitskMap/src/assets/map/logos/iai.webp'
+import ift from 'C://React_projects/TroitskMap/src/assets/map/logos/ift.webp'
+import izmiran from 'C://React_projects/TroitskMap/src/assets/map/logos/izmiran.webp'
+import mns from 'C://React_projects/TroitskMap/src/assets/map/logos/mns.webp'
+import tisnym from 'C://React_projects/TroitskMap/src/assets/map/logos/tisnym.webp'
 
 // Сам холст с объектами на нём
 export const ZoomableCanvas = () => {
     // Специальный canvas из библиотеки fabric
     const { editor, onReady } = useFabricJSEditor()
     const [open, setOpen] = useState(false)
+    const [openMNS, setOpenMNS] = useState(false)
+    const [openIAI, setOpenIAI] = useState(false)
+    const [openIFT, setOpenIFT] = useState(false)
+    const [openIZMIRAN, setOpenIZMIRAN] = useState(false)
+    const [openTISNYM, setOpenTISNYM] = useState(false)
 
     useEffect(() => {
         if (!editor) return
@@ -34,6 +51,8 @@ export const ZoomableCanvas = () => {
             fabric.Image.fromURL(path, function (img) {
                 // Если объект не является картой (не расположен по пути map)
                 if (path != map) {
+                    img.scaleToWidth(100) // Масштабируем объект
+                    img.scaleToHeight(100) // Масштабируем объект
                     // Используем переданные значения
                     img.set({
                         left: left,
@@ -133,6 +152,11 @@ export const ZoomableCanvas = () => {
         addToCanvas(map)
         // картинка, смещение по x и y, функция открытия. Можно просто вставлять это везде
         addToCanvas(reactImage, 400, 400, () => setOpen(true))
+        addToCanvas(mns, 1461, 1044, () => setOpenMNS(true))
+        addToCanvas(iai, 746, 1565, () => setOpenIAI(true))
+        addToCanvas(ift, 1818, 770, () => setOpenIFT(true))
+        addToCanvas(tisnym, 1894, 856, () => setOpenTISNYM(true))
+        addToCanvas(izmiran, 2164, 706, () => setOpenIZMIRAN(true))
 
         // Масштабирование в точку
         const handleMouseWheel = (opt) => {
@@ -189,6 +213,81 @@ export const ZoomableCanvas = () => {
             >
                 {/* тексты хранятся в файле texts.jsx, чтобы не засорять тут код */}
                 {textIFWD}
+            </CardElement>
+            <CardElement
+                open={openMNS}
+                setOpen={setOpenMNS}
+                header={'Памятник младшему научному сотруднику (МНС)'}
+                images={[
+                    'src/assets/map/photos/mns/p1.png',
+                    'src/assets/map/photos/mns/p2.png',
+                ]}
+                hrefMoreDetails={'https://www.google.com/'}
+            >
+                {/* тексты хранятся в файле texts.jsx, чтобы не засорять тут код */}
+                {textMNS}
+            </CardElement>
+            <CardElement
+                open={openIAI}
+                setOpen={setOpenIAI}
+                header={'ФГБУН «Институт ядерных исследований РАН» (ИЯИ РАН)'}
+                images={[
+                    'src/assets/map/photos/iai/p1.jpg',
+                    'src/assets/map/photos/iai/p2.jpg',
+                    'src/assets/map/photos/iai/p3.jpg',
+                ]}
+                hrefMoreDetails={'https://www.google.com/'}
+            >
+                {/* тексты хранятся в файле texts.jsx, чтобы не засорять тут код */}
+                {textIAI}
+            </CardElement>
+            <CardElement
+                open={openIFT}
+                setOpen={setOpenIFT}
+                header={
+                    'Отделение «Институт фотонных технологий» Курчатовского комплекса кристаллографии и фотоники (КККиФ) НИЦ «Курчатовский институт»'
+                }
+                images={[
+                    'src/assets/map/photos/ift/p1.png',
+                    'src/assets/map/photos/ift/p2.png',
+                ]}
+                hrefMoreDetails={'https://www.google.com/'}
+            >
+                {/* тексты хранятся в файле texts.jsx, чтобы не засорять тут код */}
+                {textIFT}
+            </CardElement>
+            <CardElement
+                open={openIZMIRAN}
+                setOpen={setOpenIZMIRAN}
+                header={
+                    'ФГБУН «Институт земного магнетизма, ионосферы и распространения радиоволн им. Н.В. Пушкова РАН» (ИЗМИРАН)'
+                }
+                images={[
+                    'src/assets/map/photos/izmiran/p1.jpg',
+                    'src/assets/map/photos/izmiran/p2.jpg',
+                    'src/assets/map/photos/izmiran/p3.jpg',
+                    'src/assets/map/photos/izmiran/p4.jpg',
+                    'src/assets/map/photos/izmiran/p5.jpg',
+                ]}
+                hrefMoreDetails={'https://www.google.com/'}
+            >
+                {/* тексты хранятся в файле texts.jsx, чтобы не засорять тут код */}
+                {textIZMIRAN}
+            </CardElement>
+            <CardElement
+                open={openTISNYM}
+                setOpen={setOpenTISNYM}
+                header={
+                    'Государственный научный центр Российской Федерации «Технологический институт сверхтвёрдых и новых углеродных материалов» (ТИСНУМ) '
+                }
+                images={[
+                    'src/assets/map/photos/tisnym/p1.png',
+                    'src/assets/map/photos/tisnym/p2.png',
+                ]}
+                hrefMoreDetails={'https://www.google.com/'}
+            >
+                {/* тексты хранятся в файле texts.jsx, чтобы не засорять тут код */}
+                {textTISNYM}
             </CardElement>
         </div>
     )
