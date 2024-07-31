@@ -119,9 +119,13 @@ export const ZoomableCanvas = () => {
                     // img.scaleToHeight(canvas.height)
                 }
                 canvas.add(img)
-                if (path != map) {
-                    // Установка z-index для изображения, чтобы объекты были поверх карты
-                    canvas.moveTo(img, 1)
+
+                // После добавления карты отправляем ее на задний план
+                if (path === map) {
+                    canvas.sendToBack(img)
+                } else {
+                    // После добавления объектов карты, перемещаем их выше карты
+                    canvas.bringToFront(img)
                 }
             })
         }
