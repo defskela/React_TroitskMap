@@ -19,6 +19,7 @@ import mns from 'C://React_projects/TroitskMap/src/assets/map/logos/mns.webp'
 import tisnym from 'C://React_projects/TroitskMap/src/assets/map/logos/tisnym.webp'
 
 // Сам холст с объектами на нём
+//
 export const ZoomableCanvas = () => {
     // Специальный canvas из библиотеки fabric
     const { editor, onReady } = useFabricJSEditor()
