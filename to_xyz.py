@@ -40,7 +40,7 @@ def generate_for_scale(z_scale):
             tile = scaled_image_pil.crop(
                 (x_i * TILE_SIZE, y_i * TILE_SIZE, (x_i + 1) * TILE_SIZE, (y_i + 1) * TILE_SIZE)
             )
-            path = os.path.join(OUTPUT_FOLDER, str(z_scale - MIN_ZOOM), str(x_i))
+            path = os.path.join(OUTPUT_FOLDER, str(z_scale - 4), str(x_i))
             os.makedirs(path, exist_ok=True)
             tile.save(os.path.join(path, f"{y_i}.png"))
     logger.info(f"Generation {z_scale - 4} took {(time.time() - start_time):.2f}s")
