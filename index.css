@@ -1,0 +1,68 @@
+html,
+body {
+  margin: 0;
+  height: 100%;
+}
+
+#map {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}
+.modal_b {
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border: 0;
+  border-radius: 10px;
+  text-align: center;
+}
+.card {
+  width: 100%;
+    max-width: 1000px;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, .125);
+  border-radius: .25rem;
+}
+.text-card h3 {
+  opacity: 1;
+  font-family: Ubuntu;
+  color: #2e2e2e;
+  background-color: #75A3C9;
+  width: 300px;
+  margin-left: 33%;
+  height: auto;
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: center;
+  padding: 5px;
+  border-radius: 5px;
+}
+.button-container a.read-more-details {
+  background-color: #4378da;
+  color: white;
+  border-color: #999;
+}
+.button-container a.read-more {
+  background-color: #73d1a4;
+  color: white;
+  border-color: #999;
+}
+.button-container a.read-previous {
+  background-color: #73d1a4;
+  color: white;
+  border-color: #999;
+}

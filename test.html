@@ -1,0 +1,912 @@
+<body style="cursor: default;">
+
+    <!-- Выпадающий список "Категории"
+    Чтобы кнопки не плавали необходимо убрать body margin -->
+    
+    
+    <!-- draggable отвечает за невозможность перетаскивания изображения, если зажать на нем ЛКМ -->
+    <div id="map" class="map_loaded" style="display: block; transform: scale(0.32); translate: 13px -195px;">
+        <img draggable="false" id="map_Troitsk" alt="Изображение не загрузилось" src="/images/jpgmax.jpg">
+    
+        <div class="Element_of_map Triniti" id="TRINITI">
+            <input draggable="false" class="point_button" id="point_busStation" type="image" src="/images/marks/triniti.webp" alt="Изображение не загрузилось">
+        </div>
+        <div class="Element_of_map Ifvd" id="IFVD">
+            <input draggable="false" class="point_button" id="point_busStation" type="image" src="/images/marks/ifvd.webp" alt="Изображение не загрузилось">
+        </div>
+        <div class="Element_of_map ISAN" id="ISAN">
+            <input draggable="false" class="point_button" id="point_busStation" type="image" src="/images/marks/isan.webp" alt="Изображение не загрузилось">
+        </div>
+        <div class="Element_of_map IZMIRAN" id="IZMIRAN">
+            <input draggable="false" class="point_button" id="point_busStation" type="image" src="/images/marks/izmiran.webp" alt="Изображение не загрузилось">
+        </div>
+        <div class="Element_of_map" id="FIAN">
+            <input draggable="false" class="point_button" id="point_busStation" type="image" src="/images/marks/fian.webp" alt="Изображение не загрузилось">
+        </div>
+        <div class="Element_of_map" id="IFZRAN">
+            <input draggable="false" class="point_button" id="point_busStation" type="image" src="/images/marks/ifz_ran.webp" alt="Изображение не загрузилось">
+        </div>
+        <div class="Element_of_map" id="IOFRAN">
+            <input draggable="false" class="point_button" id="point_busStation" type="image" src="/images/marks/iof_ran.webp" alt="Изображение не загрузилось">
+        </div>
+        <div class="Element_of_map" id="IYAI">
+            <input draggable="false" class="point_button" id="point_busStation" type="image" src="/images/marks/iyai.webp" alt="Изображение не загрузилось">
+        </div>
+        <div class="Element_of_map" id="KIF">
+            <input draggable="false" class="point_button" id="point_busStation" type="image" src="/images/marks/kif.webp" alt="Изображение не загрузилось">
+        </div>
+        <div class="Element_of_map" id="MNS">
+            <input draggable="false" class="point_button" id="point_busStation" type="image" src="/images/marks/mns.webp" alt="Изображение не загрузилось">
+        </div>
+        <div class="Element_of_map" id="TISNYM">
+            <input draggable="false" class="point_button" id="point_busStation" type="image" src="/images/marks/tisnym.webp" alt="Изображение не загрузилось">
+        </div>
+        <div class="Element_of_map" id="TROITSK">
+            <input draggable="false" class="point_button" id="point_busStation" type="image" src="/images/marks/troitsk.webp" alt="Изображение не загрузилось">
+        </div>
+    </div>
+    
+    <!-- Кнопка увеличения масштаба -->
+    <input draggable="false" class="fixed_points" id="zoomin" type="image" src="/images/icons/plu.svg" alt="Изображение не загрузилось">
+    <!-- Кнопка уменьшения масштаба -->
+    <input draggable="false" class="fixed_points" id="zoomout" type="image" src="/images/icons/minu.svg" alt="Изображение не загрузилось">
+    <!-- компас. Кнопка, но нажатие эффекта не даёт -->
+    <input draggable="false" class="fixed_points" id="compass" type="image" src="/images/icons/kom.svg" alt="Изображение не загрузилось">
+    
+    <dialog class="modal_b" id="modalISAN">
+        <div class="modalISAN_inner">
+            <div class="card">
+                <div class="close-button" id="closebtn">✕</div>
+                <div id="carouselISAN" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselISAN" data-bs-slide-to="0" class="active"></button>
+                        <button type="button" data-bs-target="#carouselISAN" data-bs-slide-to="1"></button>
+                        <button type="button" data-bs-target="#carouselISAN" data-bs-slide-to="2"></button>
+                        <button type="button" data-bs-target="#carouselISAN" data-bs-slide-to="3"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active" style="background-image: url('/images/cards_img/исан1.jpg')"></div>
+                        <div class="carousel-item" style="background-image: url('/images/cards_img/исан2.jpg')"></div>
+                        <div class="carousel-item" style="background-image: url('/images/cards_img/исан3.jpg')"></div>
+                        <div class="carousel-item" style="background-image: url('/images/cards_img/исан4.jpg')"></div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselISAN" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselISAN" data-bs-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </button>
+                    <h2>Институт спектроскопии Российской академии наук (ИСАН)</h2>
+                </div>
+    
+                <div class="text-card">
+                    <div id="carouselTextISAN" class="carousel slide" data-bs-ride="carousel" data-bs-touch="false" data-bs-interval="false">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active" id="textSlide1">
+                                <div class="custom"></div>
+                                <div class="custom3"></div>
+                                <h3>Историческая справка</h3>
+                                <p>Институт спектроскопии Российской академии наук (ИСАН) создан в 1968 году на базе
+                                    лаборатории
+                                    Комиссии по спектроскопии АН СССР. </p>
+                                <p>С 2015 г. по настоящее время Институтом руководит почетный член Европейского Физического
+                                    общества, д.ф.-м.н., профессор Задков Виктор Николаевич. </p>
+                                <p>В настоящее время Институт входит в состав Отделения физических наук РАН, в штате
+                                    Института
+                                    насчитывается около 200 человек, из них примерно половина - научные сотрудники, в числе
+                                    которых ~30 докторов и ~ 45 кандидатов наук.</p>
+                                <div class="custom1"></div>
+                                <div class="custom2"></div>
+                            </div>
+                            <div class="carousel-item" id="textSlide2">
+                                <div class="custom_0"></div>
+                                <h3>Прямо сейчас</h3>
+                                <p>В ИСАНе изучают природу с помощью методов спектроскопии: от космоса и живых систем до
+                                    твердых
+                                    тел и наносистем. Здесь проводятся "игры" со светом: фотоника, плазмоника и
+                                    наноплазмоника.
+                                    В лаборатории спектроскопии ультрабыстрых процессов изучают процессы в веществе, которые
+                                    длятся пико- и фемтосекунды. Также, здесь исследуется филаментация, лазерный
+                                    майкромашининг,
+                                    молекулярное кино, биосенсоры, литография нового поколения и холодные атомы.</p>
+                                <p>Институт входит в пятерку по цитируемости публикаций в Scopus и в Web of Science, вошел в
+                                    первую группу институтов РАН. ИСАН является участником крупных международных проектов —
+                                    CERN, FAIR, DESY. ИСАН — научная Мекка для ученых всего мира, включая Нобелевских
+                                    лауреатов
+                                    по лазерной физике, фотонике и спектроскопии, которые часто посещают институт и
+                                    выступают на
+                                    семинарах с докладами.</p>
+                                <div class="custom1_2"></div>
+                                <div class="custom2_2"></div>
+                                <div class="custom_3"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="button-container">
+                        <a class="read-previous" data-bs-target="#carouselTextISAN" data-bs-slide="prev">Назад</a>
+                        <a class="read-more" data-bs-target="#carouselTextISAN" data-bs-slide="next">Далее</a>
+                        <a href="https://isan.troitsk.ru/" target="_blank" class="read-more-details">Узнать подробнее</a>
+                    </div>
+    
+                </div>
+            </div>
+    
+        </div>
+    </dialog>
+    <dialog class="modal_b" id="modalIFVD">
+        <div class="modalIFVD_inner">
+            <div class="card">
+                <div class="close-button" id="closebtnIFVD">✕</div>
+                <div id="carouselIFVD" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselIFVD" data-bs-slide-to="0" class=""></button>
+                        <button type="button" data-bs-target="#carouselIFVD" data-bs-slide-to="1" class=""></button>
+                        <button type="button" data-bs-target="#carouselIFVD" data-bs-slide-to="2" class=""></button>
+                        <button type="button" data-bs-target="#carouselIFVD" data-bs-slide-to="3" class="active" aria-current="true"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item" style="background-image: url('/images/cards_img/ифвд1.jpg')"></div>
+                        <div class="carousel-item" style="background-image: url('/images/cards_img/ифвд2.jpg')"></div>
+                        <div class="carousel-item" style="background-image: url('/images/cards_img/ифвд3.jpg')"></div>
+                        <div class="carousel-item active" style="background-image: url('/images/cards_img/ифвд4.jpg')"></div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselIFVD" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselIFVD" data-bs-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </button>
+                    <h2>Институт физики высоких давлений им. Л. Ф. Верещагина РАН (ИФВД РАН)</h2>
+    
+                </div>
+                <div class="text-card">
+                    <div id="carouselTextIFVD" class="carousel slide" data-bs-ride="carousel" data-bs-touch="false" data-bs-interval="false">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active" id="ifvdTextSlide1">
+                                <div class="custom"></div>
+                                <div class="custom3"></div>
+                                <h3>Историческая справка</h3>
+                                <p>Институт физики высоких давлений им. Л. Ф. Верещагина РАН (ИФВД РАН) был образован в 1958
+                                    году по инициативе советского физика, академика АН СССР Леонида Фёдоровича Верещагина.
+                                </p><p>
+                                </p><p>Институт получил международное признание в начале 60-х годов, в результате успешного
+                                    синтеза
+                                    алмаза и кубического нитрида бора. Открытие в 2004 г. сверхпроводящего алмаза привело к
+                                    развитию нового направления в физике полупроводников и еще раз подтвердило высокую
+                                    репутацию
+                                    Института.</p>
+                                <p>С 2016 года директором ИФВД является академик Вадим Вениаминович Бражкин.</p>
+                                <div class="custom1"></div>
+                                <div class="custom2"></div>
+                            </div>
+                            <div class="carousel-item" id="ifvdTextSlide2">
+                                <div class="custom_0"></div>
+                                <h3>Прямо сейчас</h3>
+                                <p>Со дня основания в ИФВД развивается физика высоких давлений, включающая в первую очередь
+                                    исследования структурных, упругих и электронных свойств твердого тела при высоких
+                                    давлениях.</p>
+                                <p>Основные научные направления могут быть разделены на две основные части:
+                                    <br>1. Экспериментальные и теоретические исследования фундаментальных свойств вещества:
+                                    структуры, электронных свойств, устойчивости и фазовых превращений при высоких
+                                    давлениях.
+                                    <br>2. Материаловедение высоких давлений, включающее синтез и исследование новых
+                                    материалов.
+                                </p>
+                                <p>ИФВД широко взаимодействует с научными организациями в России и за рубежом. Технология,
+                                    аппаратура и приборы, разработанные в ИФВД, применяются во многих научных центрах и
+                                    фирмах Англии, Германии, Франции, США, Китая и др. стран.
+                                    За последние 15 лет ИФВД РАН провел свыше 30 международных и российских конференций.</p>
+                                <div class="custom1_2"></div>
+                                <div class="custom2_2"></div>
+                                <div class="custom_3"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="button-container">
+                        <a class="read-previous" data-bs-target="#carouselTextIFVD" data-bs-slide="prev">Назад</a>
+                        <a class="read-more" data-bs-target="#carouselTextIFVD" data-bs-slide="next">Далее</a>
+                        <a href="http://www.hppi.troitsk.ru/" target="_blank" class="read-more-details">Узнать подробнее</a>
+                    </div>
+    
+                </div>
+            </div>
+        </div>
+    </dialog>
+    <dialog class="modal_b" id="modalIZMIRAN">
+        <div class="modalIZMIRAN_inner">
+    
+            <div class="card">
+                <div class="close-button" id="closebtnIZMIRAN">✕</div>
+                <div id="carouselIZMIRAN" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselIZMIRAN" data-bs-slide-to="0" class="active"></button>
+                        <button type="button" data-bs-target="#carouselIZMIRAN" data-bs-slide-to="1"></button>
+                        <button type="button" data-bs-target="#carouselIZMIRAN" data-bs-slide-to="2"></button>
+                        <button type="button" data-bs-target="#carouselIZMIRAN" data-bs-slide-to="3"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active" style="background-image: url('/images/cards_img/измиран1.jpg')"></div>
+                        <div class="carousel-item" style="background-image: url('/images/cards_img/измиран2.jpg')"></div>
+                        <div class="carousel-item" style="background-image: url('/images/cards_img/измиран3.jpg')"></div>
+                        <div class="carousel-item" style="background-image: url('/images/cards_img/измиран4.jpg')"></div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselIZMIRAN" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselIZMIRAN" data-bs-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </button>
+                    <h2>ФГБУН «Институт земного магнетизма, ионосферы и распространения радиоволн им. Н.В.
+                        Пушкова РАН» (ИЗМИРАН)</h2>
+                </div>
+    
+                <div class="text-card">
+                    <div id="carouselTextIZMIRAN" class="carousel slide" data-bs-ride="carousel" data-bs-touch="false" data-bs-interval="false">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active" id="textSlide1">
+                                <div class="custom"></div>
+                                <div class="custom3"></div>
+                                <h3>Историческая справка</h3>
+                                <p>ФГБУН «Институт земного магнетизма, ионосферы и распространения радиоволн им. Н.В.
+                                    Пушкова
+                                    РАН» (ИЗМИРАН) был основан в 1939 году как Научно-исследовательский Институт земного
+                                    магнетизма (НИИЗМ) на базе Павловской магнитной обсерватории в Павловске. Во время войны
+                                    деятельность института была ориентирована на удовлетворение нужд армии. К 1946 году
+                                    институт
+                                    вернулся в Троицк. А в 1959 был введён в состав Академии наук СССР. Институт имеет
+                                    несколько
+                                    отделений в России. Например, филиалы в Санкт- Петербурге, Калининграде и
+                                    Владикавказе.</p>
+                                <p>В 2004 году Институту присвоено имя Николая Васильевича Пушкова, советского геофизика,
+                                    основателя и первого директора Института. Ключевым для ИЗМИРАНа оказался 1957 год.
+                                    Запуск
+                                    первого искусственного спутника Земли (ИСЗ) ознаменовал открытие космической эры в
+                                    исследованиях земного магнетизма и ионосферы. За первые в мире магнитные измерения с
+                                    ИСЗ,
+                                    сделанные с участием ИЗМИРАНа, Н. В. Пушков, вместе с другими учёными, был удостоен
+                                    Ленинской премии.</p>
+                                <div class="custom1"></div>
+                                <div class="custom2"></div>
+                            </div>
+                            <div class="carousel-item" id="textSlide2">
+                                <div class="custom_0"></div>
+                                <h3>Прямо сейчас</h3>
+                                <p>В ИЗМИРАНе проводятся исследования постоянного и переменного магнитного поля Земли и
+                                    планет
+                                    солнечной системы, а также межпланетного магнитного поля, изучение ионосферы и
+                                    распространения радиоволн. Работают направления по солнечно-земной физике и научному
+                                    приборостроению. В течение многих лет в Институте ведутся разработки магнитометрической
+                                    аппаратуры и обсерваторские геомагнитные измерения.</p>
+                                <p>За последнее время наиболее значимым из реализованных ИЗМИРАНом в рамках Федеральной
+                                    космической программы был проект КОРОНАС-Ф по изучению солнечной активности и её
+                                    воздействия
+                                    на Землю. Проект удостоен премии Правительства РФ. Институт также принимает участие в
+                                    подготовке новых космических проектов по изучению солнечной активности и её влияния на
+                                    Землю.</p>
+                                <p>С 2004 года Директором ИЗМИРАНа является Владимир Дмитриевич Кузнецов — советский и
+                                    российский физик, выпускник МФТИ.</p>
+                                <div class="custom1_2"></div>
+                                <div class="custom2_2"></div>
+                                <div class="custom_3"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="button-container">
+                        <a class="read-previous" data-bs-target="#carouselTextIZMIRAN" data-bs-slide="prev">Назад</a>
+                        <a class="read-more" data-bs-target="#carouselTextIZMIRAN" data-bs-slide="next">Далее</a>
+                        <a href="https://www.izmiran.ru/?LANG=ru" target="_blank" class="read-more-details">Узнать
+                            подробнее</a>
+                    </div>
+    
+    
+                </div>
+            </div>
+        </div>
+    </dialog>
+    <dialog class="modal_b" id="modalTRINITI">
+        <div class="modalTRINITI_inner">
+    
+            <div class="card">
+                <div class="close-button" id="closebtnTRINITI">✕</div>
+                <div id="carouselTRINITI" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselTRINITI" data-bs-slide-to="0" class="active"></button>
+                        <button type="button" data-bs-target="#carouselTRINITI" data-bs-slide-to="1"></button>
+                        <button type="button" data-bs-target="#carouselTRINITI" data-bs-slide-to="2"></button>
+                        <button type="button" data-bs-target="#carouselTRINITI" data-bs-slide-to="3"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item" style="background-image: url('/images/cards_img/тринити3.jpg')"></div>
+                        <div class="carousel-item" style="background-image: url('/images/cards_img/тринити2.jpg')"></div>
+                        <div class="carousel-item active" style="background-image: url('/images/cards_img/тринити1.jpg')"></div>
+                        <div class="carousel-item" style="background-image: url('/images/cards_img/тринити4.jpg')"></div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselTRINITI" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselTRINITI" data-bs-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </button>
+                    <h2>Троицкий институт инновационных и термоядерных исследований (ТРИНИТИ)</h2>
+                </div>
+    
+                <div class="text-card">
+                    <div id="carouselTextTRINITI" class="carousel slide" data-bs-ride="carousel" data-bs-touch="false" data-bs-interval="false">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active" id="trinitiTextSlide1">
+                                <div class="custom"></div>
+                                <div class="custom3"></div>
+                                <h3>Историческая справка</h3>
+                                <p>ТРИНИТИ начал свое развитие в 1952 году с организации Магнитной лаборатории АН СССР по
+                                    инициативе академика А.П. Александрова.</p>
+                                <p>В 1961 году лаборатория была включена в состав Института атомной энергии им. И. В.
+                                    Курчатова
+                                    в качестве сектора, а в 1971 года стала филиалом.</p>
+                                <p>В 1991 году Филиал Института атомной энергии им. И.В. Курчатова был переименован в
+                                    Троицкий
+                                    институт инновационных и термоядерных исследований.</p>
+                                <p>В 1994 году институт получил статус Государственного научного центра и сохраняет его по
+                                    сей
+                                    день.</p>
+                                <p>В 2018 году генеральным директором АО "ГНЦ РФ ТРИНИТИ" стал доктор технических наук
+                                    Дмитрий Владимирович Марков.</p>
+                                <p>С 2022 года Генеральным директором ГНЦ РФ ТРИНИТИ назначен кандидат технических наук Кирилл Игоревич Ильин.</p>
+                                <div class="custom1"></div>
+                                <div class="custom2"></div>
+                            </div>
+                            <div class="carousel-item" id="trinitiTextSlide2">
+                                <div class="custom_0"></div>
+                                <h3>Прямо сейчас</h3>
+                                <p>Сейчас в штабе института насчитывается 1320 сотрудников, из которых 290 - научные
+                                    сотрудники,
+                                    150 - кандидаты наук и 53 - доктора наук.</p>
+                                <p>Основные направления института: научная деятельность в области физики плазмы,
+                                    управляемого
+                                    термоядерного синтеза, лазерной физики и техники, физики экстремального состояния
+                                    вещества,
+                                    физики процессов преобразования энергии, потоков и лазерного излучения, материалов с
+                                    улучшенными свойствами, автономных источников энергопитания, развитие физических моделей
+                                    и расчётных кодов для прогнозирования поведения топлива и элементов активных зон ядерных
+                                    реакторов и др.</p>
+                                <p>Созданные учеными института МГД-установки продемонстрировали возможности их
+                                    использования для зондирования земной коры, поиска полезных ископаемых и прогнозирования
+                                    землетрясений.</p>
+                                <p>Созданный в 2011 году в ТРИНИТИ по заказу мобильный лазерный технологический комплекс
+                                    МЛТК-20 впервые в мире позволил в рекордные сроки ликвидировать аварию на газовой
+                                    скважине № 506 Западно-Таркосалинского месторождения.</p>
+                                <div class="custom1_2"></div>
+                                <div class="custom2_2"></div>
+                                <div class="custom_3"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="button-container">
+                        <a class="read-previous" data-bs-target="#carouselTextTRINITI" data-bs-slide="prev">Назад</a>
+                        <a class="read-more" data-bs-target="#carouselTextTRINITI" data-bs-slide="next">Далее</a>
+                        <a href="https://www.triniti.ru/company/" target="_blank" class="read-more-details">Узнать
+                            подробнее</a>
+                    </div>
+    
+                </div>
+            </div>
+        </div>
+    </dialog>
+    <dialog class="modal_b" id="modalFIAN">
+        <div class="modalFIAN_inner">
+            <div class="card">
+                <div class="close-button" id="closebtn">✕</div>
+                <div id="carouselFIAN" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselFIAN" data-bs-slide-to="0" class="active"></button>
+                        <button type="button" data-bs-target="#carouselFIAN" data-bs-slide-to="1"></button>
+                        <button type="button" data-bs-target="#carouselFIAN" data-bs-slide-to="2"></button>
+                        <button type="button" data-bs-target="#carouselFIAN" data-bs-slide-to="3"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active" style="background-image: url('/images/cards_img/фиан1.jpg')"></div>
+                        <div class="carousel-item" style="background-image: url('/images/cards_img/фиан2.jpg')"></div>
+                        <div class="carousel-item" style="background-image: url('/images/cards_img/фиан3.jpg')"></div>
+                        <div class="carousel-item" style="background-image: url('/images/cards_img/фиан4.jpg')"></div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselFIAN" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselFIAN" data-bs-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </button>
+                    <h2>Троицкое обособленное подразделение Физического института им. П.Н.Лебедева РАН, (ТОП ФИАН)</h2>
+                </div>
+    
+                <div class="text-card">
+                    <div id="carouselTextFIAN" class="carousel slide" data-bs-ride="carousel" data-bs-touch="false" data-bs-interval="false">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active" id="textSlide1">
+                                <h3>Историческая справка</h3>
+                                <p>В 1963 году было создано Особое Конструкторское Бюро Физического Института в г. Троицке
+                                    (ОКБ ФИАН). </p>
+                                <p>В 2008 году с целью формирования среды, благоприятной для развития инновационного
+                                    предпринимательства, создан Троицкий Технопарк Физического Института им. П.Н. Лебедева
+                                    РАН, который является инновационным подразделением ТОП ФИАН. Троицкий Технопарк
+                                    сохраняет и развивает традиции ОКБ ФИАН в разработке и создании современной
+                                    научно-технической продукции.</p>
+                                <p>В 2017 году в структуре Троицкого Технопарка ФИАН представлено более 20 активно
+                                    действующих малых предприятий-резидентов Технопарка, имеющих опыт в организации и
+                                    проведении научно исследовательских, опытно-конструкторских, технологических работ.</p>
+                                <p></p>
+                            </div>
+                            <div class="carousel-item" id="textSlide2">
+                                <div class="custom_0"></div>
+                                <h3>Прямо сейчас</h3>
+                                <p>Основные направления научных исследований ТОП ФИАН:</p>
+                                <p>• создание, исследование и применение лазеров в технологии, медицине, и других областях
+                                    науки и техники;</p>
+                                <p>• миниатюрные атомные часы;</p>
+                                <p>• фемтосекундная оптика и лазерная техника, физика взаимодействия сверхсильных лазерных
+                                    полей с веществом;</p>
+                                <p>• технологии роста кристаллов со специальными свойствами;</p>
+                                <p>• оптическая наноскопия и сенсорика;</p>
+                                <p>• медицинские лазерные аппараты для селективного воздействия при лечении кожных, глазных
+                                    и онкологических заболеваний;</p>
+                                <p>• разработка и производство прецизионных оптических компонентов: зеркал, многослойных
+                                    интерференционных фильтров, просветляющих покрытий;</p>
+                                <p>• физика элементарных частиц.</p>
+                                <p>Сейчас руководителем ТОП ФИАН является доктор физико-математических наук,
+                                    член-корреспондент РАН, Андрей Витальевич Наумов.</p>
+                                <p>В ТОП ФИАН работают 180 человек, из них 70 – научные сотрудники, в том числе 12 докторов
+                                    наук и 36 кандидатов наук.</p>
+                                <p></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="button-container">
+                        <a class="read-previous" data-bs-target="#carouselTextFIAN" data-bs-slide="prev">Назад</a>
+                        <a class="read-more" data-bs-target="#carouselTextFIAN" data-bs-slide="next">Далее</a>
+                        <a href="https://troitsk.lebedev.ru/ru/" target="_blank" class="read-more-details">Узнать
+                            подробнее</a>
+                    </div>
+    
+                </div>
+            </div>
+    
+        </div>
+    </dialog>
+    <dialog class="modal_b" id="modalIFZRAN">
+        <div class="modalIFZRAN_inner">
+            <div class="card">
+                <div class="close-button" id="closebtn">✕</div>
+                <div id="carouselIFZRAN" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselIFZRAN" data-bs-slide-to="0" class="active"></button>
+                        <button type="button" data-bs-target="#carouselIFZRAN" data-bs-slide-to="1"></button>
+                        <button type="button" data-bs-target="#carouselIFZRAN" data-bs-slide-to="2"></button>
+                        <button type="button" data-bs-target="#carouselIFZRAN" data-bs-slide-to="3"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active" style="background-image: url('/images/cards_img/ифз_ран1.jpg')"></div>
+                        <div class="carousel-item" style="background-image: url('/images/cards_img/ифз_ран2.jpg')"></div>
+                        <div class="carousel-item" style="background-image: url('/images/cards_img/ифз_ран3.jpg')"></div>
+                        <div class="carousel-item" style="background-image: url('/images/cards_img/ифз_ран4.jpg')"></div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselIFZRAN" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselIFZRAN" data-bs-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </button>
+                    <h2>ФГБУН «Центр геоэлектромагнитных исследований Института физики Земли им. О.Ю. Шмидта РАН», (ЦГЭМИ
+                        ИФЗ РАН)</h2>
+                </div>
+    
+                <div class="text-card">
+                    <div id="carouselTextIFZRAN" class="carousel slide" data-bs-ride="carousel" data-bs-touch="false" data-bs-interval="false">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active" id="textSlide1">
+                                <h3>Историческая справка</h3>
+                                <p>Центр геоэлектромагнитных исследований ИФЗ РАН основан в 1993 г., входит в состав
+                                    Федерального государственного бюджетного учреждения науки Института физики Земли им.
+                                    О.Ю. Шмидта Российской академии наук (ИФЗ РАН).</p>
+                                <p>В ЦГЭМИ проводятся фундаментальные и прикладные научные исследования с целях развития
+                                    электромагнитных геофизических методов изучения земной коры и верхней мантии
+                                    применительно к глубинным, структурным, нефтегазовым, инженерно-геологическим и другим
+                                    задачам. </p>
+                                <p></p>
+                            </div>
+                            <div class="carousel-item" id="textSlide2">
+                                <div class="custom_0"></div>
+                                <h3>Прямо сейчас</h3>
+                                <p>Основные направления исследований: региональные магнитотеллурические исследования; методы
+                                    трёхмерной интерпретации электромагнитных данных; электромагнитный мониторинг
+                                    геофизических процессов; морская геоэлектрика; теория электромагнитных полей в
+                                    анизотропных и частотно-диспергирующих средах; физические и математические основы связи
+                                    сейсмических и электромагнитных явлений в пористых и водонасыщенных горных породах;
+                                    высокоразрешающая малоглубинная электроразведка; электромагнитная томография вулканов,
+                                    геотермальных зон и разломов земной коры.</p>
+                                <p>Директор института - Варенцов Иван Михайлович, кандидат физико-математических наук.</p>
+                                <p></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="button-container">
+                        <a class="read-previous" data-bs-target="#carouselTextIFZRAN" data-bs-slide="prev">Назад</a>
+                        <a class="read-more" data-bs-target="#carouselTextIFZRAN" data-bs-slide="next">Далее</a>
+                        <a href="https://gemrc.ru/" target="_blank" class="read-more-details">Узнать подробнее</a>
+                    </div>
+    
+                </div>
+            </div>
+    
+        </div>
+    </dialog>
+    <dialog class="modal_b" id="modalIOFRAN">
+        <div class="modalIOFRAN_inner">
+            <div class="card">
+                <div class="close-button" id="closebtn">✕</div>
+                <div id="carouselIOFRAN" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselIOFRAN" data-bs-slide-to="0" class="active"></button>
+                        <button type="button" data-bs-target="#carouselIOFRAN" data-bs-slide-to="1"></button>
+                        <button type="button" data-bs-target="#carouselIOFRAN" data-bs-slide-to="2"></button>
+                        <button type="button" data-bs-target="#carouselIOFRAN" data-bs-slide-to="3"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active" style="background-image: url('/images/cards_img/иоф_ран1.jpg')"></div>
+                        <div class="carousel-item" style="background-image: url('/images/cards_img/иоф_ран2.jpg')"></div>
+                        <div class="carousel-item" style="background-image: url('/images/cards_img/иоф_ран3.jpg')"></div>
+                        <div class="carousel-item" style="background-image: url('/images/cards_img/иоф_ран4.jpg')"></div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselIOFRAN" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselIOFRAN" data-bs-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </button>
+                    <h2>Центр Физического Приборостроения Института Общей Физики Российской Академии Наук (ЦФП ИОФ РАН)</h2>
+                </div>
+    
+                <div class="text-card">
+                    <div id="carouselTextIOFRAN" class="carousel slide" data-bs-ride="carousel" data-bs-touch="false" data-bs-interval="false">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active" id="textSlide1">
+                                <h3>Историческая справка</h3>
+                                <p>Центр Физического Приборостроения Института Общей Физики Российской Академии Наук (ЦФП
+                                    ИОФ РАН) был основан в 1982 году лауреатом Нобелевской премии, академиком Александром
+                                    Михайловичем Прохоровым, который возглавлял его до 1998 года. В 2002 г. Институту было
+                                    присвоено имя академика А.М. Прохорова.</p>
+                                <p>Институт был создан на базе Отделения «А» Физического института им. П.Н. Лебедева АН
+                                    СССР. Отделение «А» включало в себя Лабораторию колебаний, Лабораторию физики плазмы и
+                                    Лабораторию физики твердого тела. </p>
+                                <p></p>
+                            </div>
+                            <div class="carousel-item" id="textSlide2">
+                                <div class="custom_0"></div>
+                                <h3>Прямо сейчас</h3>
+                                <p>На сегодняшний день ЦФП является крупнейшим российским разработчиком современных газовых
+                                    лазеров и систем для науки, производства и медицины.</p>
+                                <p>Офтальмологические эксимерлазерные системы для коррекции зрения установлены во многих
+                                    клиниках в России и за рубежом. В ЦПФ ИОФ РАН проводятся исследовательские работы по
+                                    созданию лазерных систем для нейрохирургии.</p>
+                                <p>В Центре проводятся исследования по разработке методов и аппаратуры для дистанционной
+                                    диагностики атмосферы. Разработаны различные лидары для определения влажности,
+                                    концентрации СО2, аэрозолей.</p>
+                                <p>С 2018 года Институт возглавляет член-корреспондент РАН Сергей Владимирович Гарнов.</p>
+                                <p>Сотрудниками Института были выполнены основополагающие работы во многих отраслях физики,
+                                    за что они удостоились высоких государственных наград и международных премий.</p>
+                                <p></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="button-container">
+                        <a class="read-previous" data-bs-target="#carouselTextIOFRAN" data-bs-slide="prev">Назад</a>
+                        <a class="read-more" data-bs-target="#carouselTextIOFRAN" data-bs-slide="next">Далее</a>
+                        <a href="http://www.pic.troitsk.ru/" target="_blank" class="read-more-details">Узнать подробнее</a>
+                    </div>
+    
+                </div>
+            </div>
+    
+        </div>
+    </dialog>
+    <dialog class="modal_b" id="modalIYAI">
+        <div class="modalIYAI_inner">
+            <div class="card">
+                <div class="close-button" id="closebtn">✕</div>
+                <div id="carouselIYAI" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselIYAI" data-bs-slide-to="0" class="active"></button>
+                        <button type="button" data-bs-target="#carouselIYAI" data-bs-slide-to="1"></button>
+                        <button type="button" data-bs-target="#carouselIYAI" data-bs-slide-to="2"></button>
+                        <button type="button" data-bs-target="#carouselIYAI" data-bs-slide-to="3"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active" style="background-image: url('/images/cards_img/ияи1.jpg')"></div>
+                        <div class="carousel-item" style="background-image: url('/images/cards_img/ияи2.jpg')"></div>
+                        <div class="carousel-item" style="background-image: url('/images/cards_img/ияи3.jpg')"></div>
+                        <div class="carousel-item" style="background-image: url('/images/cards_img/ияи4.jpg')"></div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselIYAI" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselIYAI" data-bs-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </button>
+                    <h2>ФГБУН «Институт ядерных исследований РАН» (ИЯИ РАН)</h2>
+                </div>
+    
+                <div class="text-card">
+                    <div id="carouselTextIYAI" class="carousel slide" data-bs-ride="carousel" data-bs-touch="false" data-bs-interval="false">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active" id="textSlide1">
+                                <h3>Историческая справка</h3>
+                                <p>Институт ядерных исследований Российской академии наук (ИЯИ РАН) образован в 1970 году
+                                    постановлением Президиума АН СССР в соответствии с решением Совета Министров СССР. </p>
+                                <p>ИЯИ РАН сегодня - крупный центр физики частиц с широкой сетью проектов международного
+                                    сотрудничества. В ИЯИ РАН ведутся работы по космологии, нейтринной физике, астрофизике,
+                                    физике высоких энергий, ускорительной физике и технике, нейтронным исследованиям и
+                                    ядерной медицине. </p>
+                                <p></p>
+                            </div>
+                            <div class="carousel-item" id="textSlide2">
+                                <div class="custom_0"></div>
+                                <h3>Прямо сейчас</h3>
+                                <p>В ИЯИ РАН действует ряд широко известных уникальных научных установок, включая Комплекс
+                                    сильноточного линейного ускорителя ионов водорода в Троицке, Баксанская нейтринная
+                                    обсерватория (Приэльбрусье, Кабардино-Балкарская Республика), Байкальский нейтринный
+                                    телескоп (озеро Байкал, Иркутская область) и эксперимент «Троицк ню-масс» (Троицк,
+                                    Москва).</p>
+                                <p>Ученые ИЯИ РАН сотрудничают со многими ведущими лабораториями, институтами и
+                                    университетами мира, принимают активное участие в работе целого ряда крупных
+                                    международных экспериментов в ЦЕРН (Швейцария), ОИЯИ (Россия), Германии, Японии, Италии,
+                                    США, Китае, Франции, Испании и других стран. Институт ведет образовательную
+                                    деятельность, имея собственную аспирантуру и базовые кафедры в МФТИ, МГУ, МИФИ, КБГУ,
+                                    сотрудничая с другими университетами России.</p>
+                                <p>Директор института – Либанов Максим Валентинович, член-корреспондент РАН.</p>
+                                <p></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="button-container">
+                        <a class="read-previous" data-bs-target="#carouselTextIYAI" data-bs-slide="prev">Назад</a>
+                        <a class="read-more" data-bs-target="#carouselTextIYAI" data-bs-slide="next">Далее</a>
+                        <a href="https://www.inr.ru/" target="_blank" class="read-more-details">Узнать подробнее</a>
+                    </div>
+    
+                </div>
+            </div>
+    
+        </div>
+    </dialog>
+    <dialog class="modal_b" id="modalKIF">
+        <div class="modalKIF_inner">
+            <div class="card">
+                <div class="close-button" id="closebtn">✕</div>
+                <div id="carouselKIF" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselKIF" data-bs-slide-to="0" class="active"></button>
+                        <button type="button" data-bs-target="#carouselKIF" data-bs-slide-to="1"></button>
+                        <button type="button" data-bs-target="#carouselKIF" data-bs-slide-to="2"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active" style="background-image: url('/images/cards_img/киф1.jpg')"></div>
+                        <div class="carousel-item" style="background-image: url('/images/cards_img/киф2.jpg')"></div>
+                        <div class="carousel-item" style="background-image: url('/images/cards_img/киф3.jpg')"></div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselKIF" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselKIF" data-bs-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </button>
+                    <h2>Отделение «Институт фотонных технологий» Курчатовского комплекса кристаллографии и фотоники
+                        (КККиФ)</h2>
+                </div>
+    
+                <div class="text-card">
+                    <div id="carouselTextKIF" class="carousel slide" data-bs-ride="carousel" data-bs-touch="false" data-bs-interval="false">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active" id="textSlide1">
+                                <h3>Историческая справка</h3>
+                                <p>Институт фотонных технологий РАН создан в 2016 году на базе Отделения перспективных
+                                    лазерных технологий Института проблем лазерных и информационных технологий (ИПЛИТ РАН).
+                                    Отделение перспективных лазерных технологий как филиал ИПЛИТ РАН располагается в Троицке
+                                    с 1979 года.</p>
+                            </div>
+                            <div class="carousel-item" id="textSlide2">
+                                <div class="custom_0"></div>
+                                <h3>Прямо сейчас</h3>
+                                <p>Направления научной деятельности ИФТ РАН:</p>
+                                <p>• Биофотоника, оптико-информационные методы исследования биообъектов разного уровня
+                                    иерархии и биосферы;</p>
+                                <p>• Аддитивные технологии и оборудование;</p>
+                                <p>• Опто-, радио- и акустоэлектроника, оптическая и СВЧ-связь, лазеры и лазерные
+                                    технологии;</p>
+                                <p>• Элементная база и материалы для микроэлектроники, наноэлектроники, квантовых
+                                    компьютеров и оптических информационных сетей, нано- и микросистемная техника;</p>
+                                <p>• Приборы, системы, изделия и технологии медицинского назначения, интеллектуальные
+                                    системы для медицины.</p>
+                                <p></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="button-container">
+                        <a class="read-previous" data-bs-target="#carouselTextKIF" data-bs-slide="prev">Назад</a>
+                        <a class="read-more" data-bs-target="#carouselTextKIF" data-bs-slide="next">Далее</a>
+                        <a href="https://kif.ras.ru/about-center/structure/strukturnye-podrazdeleniya/iptras/" target="_blank" class="read-more-details">Узнать подробнее</a>
+                    </div>
+    
+                </div>
+            </div>
+    
+        </div>
+    </dialog>
+    <dialog class="modal_b" id="modalMNS">
+        <div class="modalMNS_inner">
+            <div class="card">
+                <div class="close-button" id="closebtn">✕</div>
+                <div id="carouselMNS" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselMNS" data-bs-slide-to="0" class="active"></button>
+                        <button type="button" data-bs-target="#carouselMNS" data-bs-slide-to="1"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active" style="background-image: url('/images/cards_img/мнс1.png')"></div>
+                        <div class="carousel-item" style="background-image: url('/images/cards_img/мнс2.png')"></div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselMNS" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselMNS" data-bs-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </button>
+                    <h2>Памятник младшему научному сотруднику (МНС)</h2>
+                </div>
+    
+                <div class="text-card">
+                    <div id="carouselTextMNS" class="carousel slide" data-bs-ride="carousel" data-bs-touch="false" data-bs-interval="false">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active" id="textSlide1">
+                                <h3>Историческая справка</h3>
+                                <p>Это - единственный в России памятник, который прославляет успехи молодых деятелей
+                                    науки.</p>
+                                <p>Открытие памятника состоялось в 2007 году и было приурочено к тридцатилетию присвоения
+                                    Троицку статуса наукограда. </p>
+                                <p>Инициаторами скульптуры стала администрация города и Троицкий научный центр РАН. Конкурс
+                                    на проект памятника провели еще в 2004 году. Разброс идей был широк - от дивана с
+                                    лейблом “НИИЧАВО” до белки в колесе, где младший научный сотрудник представал в
+                                    аллегорическом виде неутомимого зверька. Однако, лучшим был признан проект Сергея
+                                    Михеева, Галины Булатовой и Натальи Мартовицкой, архитекторов из ГИПРОНИИ РАН.</p>
+                                <p></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="button-container hidden-button-container">
+                    </div>
+                </div>
+            </div>
+    
+        </div>
+    </dialog>
+    <dialog class="modal_b" id="modalTISNYM">
+        <div class="modalTISNYM_inner">
+            <div class="card">
+                <div class="close-button" id="closebtn">✕</div>
+                <div id="carouselTISNYM" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselTISNYM" data-bs-slide-to="0" class="active"></button>
+                        <button type="button" data-bs-target="#carouselTISNYM" data-bs-slide-to="1"></button>
+                        <button type="button" data-bs-target="#carouselTISNYM" data-bs-slide-to="2"></button>
+                        <button type="button" data-bs-target="#carouselTISNYM" data-bs-slide-to="3"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active" style="background-image: url('/images/cards_img/тиснум1.png')"></div>
+                        <div class="carousel-item" style="background-image: url('/images/cards_img/тиснум2.png')"></div>
+                        <div class="carousel-item" style="background-image: url('/images/cards_img/тиснум3.jpg')"></div>
+                        <div class="carousel-item" style="background-image: url('/images/cards_img/тиснум4.jpg')"></div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselTISNYM" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselTISNYM" data-bs-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </button>
+                    <h2>ФГБНУ "Технологический институт сверхтвердых и новых углеродных материалов" (ТИСНУМ)</h2>
+                </div>
+    
+                <div class="text-card">
+                    <div id="carouselTextTISNYM" class="carousel slide" data-bs-ride="carousel" data-bs-touch="false" data-bs-interval="false">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active" id="textSlide1">
+                                <h3>Историческая справка</h3>
+                                <p>Государственный научный центр Российской Федерации «Технологический институт сверхтвёрдых
+                                    и новых углеродных материалов» (ТИСНУМ) основан в 1995 году, как Научно-технический
+                                    центр «Сверхтвердые материалы». В 1998 году приказом Министерства науки и технологий
+                                    реорганизован в Технологический институт сверхтвердых и новых углеродных материалов.</p>
+                                <p>Основная задача ТИСНУМ - создание новых материалов. Для этого в институте проводится весь
+                                    комплекс необходимых работ для реализации этой цели.</p>
+                                <p></p>
+                            </div>
+                            <div class="carousel-item" id="textSlide2">
+                                <div class="custom_0"></div>
+                                <h3>Прямо сейчас</h3>
+                                <p>Институт обладает технологией получения монокристаллов алмаза весом до 7 карат, не
+                                    имеющих природных аналогов. В настоящее время технология внедряется в производство.</p>
+                                <p>ТИСНУМ ведет работы по созданию конструкционных наноматериалов следующих систем: металл,
+                                    металл-углерод, углерод-углерод, а также наноструктурированых керамик. Уже получены
+                                    материалы с уникальными механическими свойствами, а также новые наноструктурированные
+                                    термоэлектрические материалы.</p>
+                                <p>С 1995 по 2019 годы директором института был профессор, доктор физико-математических
+                                    наук, Бланк Владимир Давыдович, сейчас - научный руководитель института. С 2019 года
+                                    директором ТИСНУМ является кандидат технических наук Терентьев Сергей Александрович.</p>
+                                <p>ТИСНУМ придает большое значение кооперации с российскими и зарубежными институтами,
+                                    такими как: Курчатовский научный центр, Институт кристаллографии РАН, Университет г.
+                                    Умеа (Швеция), Университет г. Манчестер (Великобритания), Лаборатория кристаллографии
+                                    Академии Наук Франции и другими научно-технологическими центрами России, Австрии,
+                                    Германии, США и Японии.</p>
+                                <p></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="button-container">
+                        <a class="read-previous" data-bs-target="#carouselTextTISNYM" data-bs-slide="prev">Назад</a>
+                        <a class="read-more" data-bs-target="#carouselTextTISNYM" data-bs-slide="next">Далее</a>
+                        <a href="http://www.tisncm.ru/" target="_blank" class="read-more-details">Узнать подробнее</a>
+                    </div>
+    
+                </div>
+            </div>
+    
+        </div>
+    </dialog>
+    <dialog class="modal_b" id="modalTROITSK">
+        <div class="modalTROITSK_inner">
+            <div class="card">
+                <div class="close-button" id="closebtn">✕</div>
+                <div id="carouselTROITSK" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselTROITSK" data-bs-slide-to="0" class="active"></button>
+                        <button type="button" data-bs-target="#carouselTROITSK" data-bs-slide-to="1"></button>
+                        <button type="button" data-bs-target="#carouselTROITSK" data-bs-slide-to="2"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active" style="background-image: url('/images/cards_img/троицк1.webp')"></div>
+                        <div class="carousel-item" style="background-image: url('/images/cards_img/троицк2.webp')"></div>
+                        <div class="carousel-item" style="background-image: url('/images/cards_img/троицк3.webp')"></div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselTROITSK" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselTROITSK" data-bs-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </button>
+                    <h2>Шрифтовая композиция ТРОИЦК</h2>
+                </div>
+                <div class="text-card">
+                    <div id="carouselTextTROITSK" class="carousel slide" data-bs-ride="carousel" data-bs-touch="false" data-bs-interval="false">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active" id="textSlide1">
+                                <h3>Историческая справка</h3>
+                                <p>Стела у храма была построена в 2015 году по проекту Отдела архитектуры администрации
+                                    Троицка, которым тогда руководил Н.В. Федосеев. Его можно считать автором композиции
+                                    (МАФа). В 2017 году территория была благоустроена и МАФ претерпела реконструкцию:
+                                    добавились шары, волновые скамьи и др</p>
+                                <p></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="button-container hidden-button-container">
+                    </div>
+    
+                </div>
+    
+            </div>
+    
+        </div>
+    </dialog>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="/static/jquery.nicescroll.min.js"></script>
+    <script src="/static/script1.js"></script>
+    <script src="/static/cards.js"></script>
+    <script src="/static/Categorys.js"></script>
+    
+    </body>
